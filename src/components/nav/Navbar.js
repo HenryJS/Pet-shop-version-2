@@ -45,10 +45,8 @@ const Navbar = () => {
         <a href="/">Available Breeds</a>
         <a href="/">Testimonials</a>
         <a href="/">About</a>
-        <a href="/">
-          <AccountCircleIcon className="navbar-cart-icon" />
-        </a>
-        <button className="primary-button">Login/sign-up</button>
+       
+        <button className="primary-button"><AccountCircleIcon className="navbar-cart-icon" /> Login/sign-up</button>
       </div>
       <div className="navbar-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
