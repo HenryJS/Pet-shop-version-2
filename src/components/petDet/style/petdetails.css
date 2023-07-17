@@ -1,0 +1,73 @@
+.pet-details-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .pet-details-heading {
+    margin-bottom: 20px;
+  }
+  
+  .pet-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pet-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .pet-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .pet-description {
+    flex: 1;
+    text-align: left;
+    margin-left: 20px;
+  }
+  
+  
+  .pet-title {
+    font-size: 24px;
+  }
+  
+  .pet-name,
+  .pet-color,
+  .pet-price {
+    margin: 10px 0;
+    text-indent: 10px;
+  }
+  
+  .buy-now-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f58e09;
+    color: #fff;
+    border: none;
+    border-radius: 34px;
+    font-size: 26px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+  }
+  .buy-now-button:hover {
+    background-color: #5f411f;
+  }
+  
+  @media (min-width: 480px) {
+    .pet-info {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .pet-description {
+      text-align: left;
+      margin-top: 0;
+      margin-left: 20px;
+    }
+  }
+  

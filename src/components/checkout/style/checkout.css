@@ -1,0 +1,83 @@
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.order-summary {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.checkout-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.checkout-table th,
+.checkout-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.checkout-table th {
+  background-color: #f2f2f2;
+}
+
+.checkout-details {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pet-details {
+  display: flex;
+  align-items: center;
+}
+
+.peet-image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.address-box {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 50%;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+
+.address-table {
+  width: 100%;
+}
+.address-table input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.address-table td {
+  padding: 8px;
+}
+
+.checkout-button {
+  padding: 10px 20px;
+  background-color: #f58506;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: ease 0.5s;
+}
+.checkout-button:hover{
+  background-color: #462a0b;
+}
