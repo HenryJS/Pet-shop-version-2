@@ -1,10 +1,10 @@
-import Navbar from "../components/nav/Navbar";
+import Footer from "../components/footer/footer"
+
 
 export default function Homepage() {
     return (
       <div className="App">
-        <Navbar />
-        <h1>One Stop Pet Shop React Project</h1>
+        <Footer />
       </div>
     )
 }
