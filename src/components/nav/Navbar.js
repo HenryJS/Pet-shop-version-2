@@ -6,7 +6,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 import PhoneRoundedIcon from '@mui/icons-material/PhoneRounded';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 import './styles/Navbar.css';
 
@@ -46,7 +46,7 @@ const Navbar = () => {
         <a href="/">Testimonials</a>
         <a href="/">About</a>
        
-        <button className="primary-button"><AccountCircleIcon className="navbar-cart-icon" /> Login/sign-up</button>
+        <button className="primary-button">Login/sign-up</button>
       </div>
       <div className="navbar-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
