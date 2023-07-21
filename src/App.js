@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import Homepage from './pages/home.page'
+import Checkoutpage from './pages/checkout.page';
 
 
 function App(){
   return(
     <Router>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+      <Route path='/' element={<Checkoutpage/>} />
       </Routes>
     </Router> 
   )
