@@ -1,45 +1,35 @@
 import React, { useState } from 'react';
 import Logo from "../assets/logo.jpg";
-import { HiOutlineBars3 } from "react-icons/hi2";
-import HomeIcon from '@mui/icons-material/Home';
-import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
-
-
-
+import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MenuIcon from '@mui/icons-material/Menu';
 import './styles/Navbar.css';
 
-const Navbar = () => {
-  const [openMenu, setOpenMenu] = useState(false);
-  const menuOptions = [
-    {
-      text: 'Home',
-      icon: <HomeIcon />,
-    },
-   
-    {
-      text: 'Testimonials',
-      icon: <CommentRoundedIcon />,
-    },
- 
-  ];
+const Navbar = ({ cartItems, totalPrice }) => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
     <nav>
       <div className="nav-logo-container">
         <img src={Logo} alt=''/>
       </div>
-      <div className="navbar-links-container">
+      <div className={`navbar-links-container ${isMobileMenuOpen ? "mobile-active" : ""}`}>
         <a href="/">Home</a>
         <a href="/">Available Breeds</a>
         <a href="/">Testimonials</a>
-        
-       
-        <button className="primary-button">Login/sign-up</button>
+        <Link to="/order-summary"> 
+          <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
+        </Link>
+        <button className="primary-button">John Henry</button>
       </div>
-      <div className="navbar-menu-container">
-            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
-    </div>
-      
+      {/* Show the menu icon only on smaller screens */}
+      <div className="menu-icon-container">
+        <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
+      </div>
     </nav>
   );
 };
