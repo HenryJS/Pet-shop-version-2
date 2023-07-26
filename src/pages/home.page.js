@@ -1,5 +1,5 @@
 
-import Home from "../components/nav/home";
+import Home from "../components/shared/home";
 
 
 

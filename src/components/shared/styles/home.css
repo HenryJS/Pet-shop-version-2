@@ -21,9 +21,7 @@
 .home-image-container img {
   width: 100%;
   height: auto;
-  border-radius: 35px; 
-
-  
+  border-radius: 35px;  
 }
 
 .home-image-section {
@@ -49,6 +47,7 @@
   max-width: 500px;
   color: #6a6a6a;
   margin: 1.5rem 0rem;
+  text-align: justify;
 }
 
 .secondary-button {
@@ -59,6 +58,7 @@
   border-radius: 5rem;
   font-size: 1.1rem;
   cursor: pointer;
+  text-decoration: none;
   font-weight: 600;
   color: white;
   transition: 0.2s;
@@ -74,4 +74,54 @@
 
 .secondary-button:hover {
   background-color: #e48f0f;
+}
+/* Mobile view */
+@media (max-width: 768px) {
+  .home-banner-container {
+    flex-direction: column-reverse;
+    padding: 2rem 1rem;
+  }
+
+  .home-bannerImage-container {
+    top: 0;
+    right: 0;
+    max-width: 70%;
+    text-align: center;
+  }
+
+  .home-image-container {
+    width: 80%;
+    margin: 2rem auto;
+  }
+
+  .home-image-container img {
+    border-radius: 25px;
+  }
+
+  .home-text-section {
+    text-align: center;
+    align-items: center;
+  }
+
+  .primary-heading {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+
+  .primary-text {
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    max-width: 90%;
+    margin: 1rem auto;
+    color: black;
+  }
+
+  .secondary-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .secondary-button svg {
+    font-size: 1.2rem;
+  }
 }
