@@ -21,9 +21,9 @@ const OrderSummary = ({ cartItems, totalPrice, removeFromCart }) => {
             {cartItems.map((item) => (
               <tr key={item.id}>
                 <td>
-                  <img src={item.image} alt={item.name} style={{ width: '80px' }} />
+                  <img src={item.image} alt={item.name} style={{ width: '60px' }} />
                 </td>
-                <td>{item.name}</td>
+                <td>{item.name} </td>
                 <td>Ksh{item.price}</td>
                 <td>
                   <button className="remove-button" onClick={() => removeFromCart(item)}>Remove</button>
