@@ -1,0 +1,91 @@
+.order-summary {
+  margin: 20px auto; 
+  padding: 20px;
+  border: 1px solid #e97b14;
+  border-radius: 35px;
+  background-color: #f9f9f9;
+  max-width: auto; 
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.151);
+}
+
+.order-summary h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.order-summary-table {
+  width: 100%;
+  
+  margin-bottom: 60px;
+}
+
+.order-summary-table th,
+.order-summary-table td {
+  padding: auto; 
+  border: 1px solid #da621d; 
+  text-align: center;
+}
+
+.order-summary-image {
+  width: 100px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+
+.order-summary-table th:nth-child(1),
+.order-summary-table td:nth-child(1),
+.order-summary-table th:nth-child(2),
+.order-summary-table td:nth-child(2),
+.order-summary-table th:nth-child(3),
+.order-summary-table td:nth-child(3),
+.order-summary-table th:nth-child(4),
+.order-summary-table td:nth-child(4) {
+  width: 20px;
+}
+.order-summary-table th {
+  text-align: left;
+  background-color: #f2f2f2;
+  padding: 40px;
+  white-space: nowrap;
+}
+
+.order-summary-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2; 
+}
+
+.checkout-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.remove-button-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.remove-button{
+  padding: 5px 10px;
+  background-color: #f31010;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  justify-content: center;
+}
+.checkout-button {
+  padding: 10px 20px;
+  background-color: #ff7300;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.checkout-button:hover {
+  background-color: #e4aa2d;
+}

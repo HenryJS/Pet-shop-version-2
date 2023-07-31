@@ -5,8 +5,8 @@ import ProductsPage from "./pages/product.page";
 import OrderSummary from "./components/products/OrderSummary";
 
 function App() {
-  const [cartItems, setCartItems] = useState([]); // Initialize cartItems state as an empty array
-  const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice state with an initial value
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   return (
     <Router>
@@ -22,7 +22,10 @@ function App() {
             />
           }
         />
-        <Route path="/order-summary" element={<OrderSummary cartItems={cartItems} />} />
+        <Route
+          path="/order-summary"
+          element={<OrderSummary cartItems={cartItems} totalPrice={totalPrice} />}
+        />
       </Routes>
     </Router>
   );

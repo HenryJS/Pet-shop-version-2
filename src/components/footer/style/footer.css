@@ -40,3 +40,28 @@ img {
   color: #4c4c4c;
   cursor: pointer;
 }
+@media (max-width: 600px) {
+  .footer-section-columns {
+    min-width: auto; 
+    display: block;
+  }
+
+  .footer-wrapper {
+    margin-top: 6rem; 
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  .footer-section-columns span {
+    display: block; 
+    padding: 0 0 10px 15px; 
+    align-items: center;
+  }
+  .footer-logo-container {
+    max-width: 110px;
+    width: 100px; 
+    height: 100px; 
+    position: relative;
+    top: 20px;
+  }
+}

@@ -7,7 +7,7 @@ import GS4 from "../assets/gs4.jpg";
 import Horse1 from "../assets/horse1.jpg";
 import Footer from "../footer/footer";
 import Navbar from '../nav/Navbar';
-
+import OrderSummary from './OrderSummary'; // Import the OrderSummary component
 
 import './style/products.css';
 
@@ -31,6 +31,13 @@ const ProductsPage = () => {
     setTotalPrice(newTotalPrice);
   };
 
+  const removeFromCart = (item) => {
+    const updatedCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
+    const newTotalPrice = totalPrice - item.price;
+    setCartItems(updatedCartItems);
+    setTotalPrice(newTotalPrice);
+  };
+
   return (
     <div>
       <Navbar cartItems={cartItems} totalPrice={totalPrice} />
@@ -48,24 +55,12 @@ const ProductsPage = () => {
           </div>
         ))}
       </div>
-
-       
-       <div className="cart-container">
-        <h2>Cart</h2>
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>Item: {item.name} - Ksh{item.price}</li>
-          ))}
-        </ul>
-        <p>Total Price: Ksh.{totalPrice}</p>
-      </div>
-
+      {cartItems.length > 0 ? <OrderSummary cartItems={cartItems} removeFromCart={removeFromCart} /> : <p>No items in the cart.</p>}
       <div>
         <Footer />
       </div>
     </div>
   );
 };
-    
 
 export default ProductsPage;

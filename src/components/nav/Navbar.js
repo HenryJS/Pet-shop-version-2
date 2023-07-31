@@ -21,7 +21,7 @@ const Navbar = ({ cartItems, totalPrice }) => {
         <a href="/">Home</a>
         <a href="/">Available Breeds</a>
         <a href="/">Testimonials</a>
-        <Link to="/order-summary"> 
+        <Link to="/order-summary"> {/* Add a link to the order summary page */}
           <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
         </Link>
         <button className="primary-button">John Henry</button>
