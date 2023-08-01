@@ -1,4 +1,3 @@
-// ProductsPage.js
 import React from 'react';
 import Dog1 from "../assets/dog1.jpg";
 import Dog2 from "../assets/dog2.jpg";

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '../products/cartcontext'; 
+import Navbar from '../nav/Navbar';
 import Footer from '../footer/footer';
 import './style/summary.css'; 
 
@@ -12,6 +13,7 @@ const OrderSummary = () => {
 
   return (
     <>
+    <Navbar/>
      <div className="order-summary-container">
       <h2>Order Summary</h2>
       <table className="order-summary-table">
@@ -42,7 +44,6 @@ const OrderSummary = () => {
          <p>Total Price: Ksh {totalPrice}</p>
       </div>
     </div>
-          {/* Checkout Table */}
           <div className="checkout-table">
         <h3>Checkout</h3>
         <div>
