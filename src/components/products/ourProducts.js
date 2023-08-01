@@ -8,7 +8,7 @@ import GS4 from "../assets/gs4.jpg";
 import Horse1 from "../assets/horse1.jpg";
 import Footer from "../footer/footer";
 import Navbar from '../nav/Navbar';
-import { useCart } from '../products/CartContext'; 
+import { useCart } from '../products/cartcontext'; 
 
 import './style/products.css';
 
