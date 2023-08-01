@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// ProductsPage.js
+import React from 'react';
 import Dog1 from "../assets/dog1.jpg";
 import Dog2 from "../assets/dog2.jpg";
 import Cat1 from "../assets/cat1.jpg";
@@ -7,13 +8,12 @@ import GS4 from "../assets/gs4.jpg";
 import Horse1 from "../assets/horse1.jpg";
 import Footer from "../footer/footer";
 import Navbar from '../nav/Navbar';
-import OrderSummary from './OrderSummary'; // Import the OrderSummary component
+import { useCart } from '../products/CartContext'; 
 
 import './style/products.css';
 
 const ProductsPage = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const { cartItems, totalPrice, addToCart } = useCart(); 
 
   const products = [
     { id: 1, name: "Japanese Spitz", image: Dog1, price: 10000 },
@@ -23,20 +23,6 @@ const ProductsPage = () => {
     { id: 5, name: "German Shepherd 4", image: GS4, price: 18000 },
     { id: 6, name: "Horse ", image: Horse1, price: 50000 },
   ];
-
-  const addToCart = (product) => {
-    const updatedCartItems = [...cartItems, product];
-    const newTotalPrice = totalPrice + product.price;
-    setCartItems(updatedCartItems);
-    setTotalPrice(newTotalPrice);
-  };
-
-  const removeFromCart = (item) => {
-    const updatedCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
-    const newTotalPrice = totalPrice - item.price;
-    setCartItems(updatedCartItems);
-    setTotalPrice(newTotalPrice);
-  };
 
   return (
     <div>
@@ -55,7 +41,7 @@ const ProductsPage = () => {
           </div>
         ))}
       </div>
-      {cartItems.length > 0 ? <OrderSummary cartItems={cartItems} removeFromCart={removeFromCart} /> : <p>No items in the cart.</p>}
+     
       <div>
         <Footer />
       </div>

@@ -1,33 +1,27 @@
-import React, { useState } from 'react';
+// App.js
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import ProductsPage from "./pages/product.page";
 import OrderSummary from "./components/products/OrderSummary";
+import { CartProvider } from './components/products/CartContext'; 
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProductsPage
-              cartItems={cartItems}
-              setCartItems={setCartItems}
-              totalPrice={totalPrice}
-              setTotalPrice={setTotalPrice}
-            />
-          }
-        />
-        <Route
-          path="/order-summary"
-          element={<OrderSummary cartItems={cartItems} totalPrice={totalPrice} />}
-        />
-      </Routes>
-    </Router>
+    <CartProvider> 
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<ProductsPage />}
+          />
+          <Route
+            path="/order-summary"
+            element={<OrderSummary />}
+          />
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }
 

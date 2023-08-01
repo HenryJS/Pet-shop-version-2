@@ -1,50 +1,71 @@
 import React from 'react';
-import "./style/summary.css";
+import { useCart } from '../products/CartContext'; 
+import Footer from '../footer/footer';
+import './style/summary.css'; 
 
-const OrderSummary = ({ cartItems, totalPrice, removeFromCart }) => {
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+const OrderSummary = () => {
+  const { cartItems, totalPrice, removeFromCart } = useCart(); 
+
+  const handleRemoveItem = (item) => {
+    removeFromCart(item);
+  };
 
   return (
-    <div className="order-summary">
+    <>
+     <div className="order-summary-container">
       <h2>Order Summary</h2>
-      {cartItems.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Action</th>
+      <table className="order-summary-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <tr key={item.id}>
+              <td>
+                <img src={item.image} alt={item.name} className="product-image" />
+              </td>
+              <td>{item.name}</td>
+              <td>Ksh {item.price}</td>
+              <td>
+                <button className='remove-button' onClick={() => handleRemoveItem(item)}>Remove</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {cartItems.map((item) => (
-              <tr key={item.id}>
-                <td>
-                  <img src={item.image} alt={item.name} style={{ width: '60px' }} />
-                </td>
-                <td>{item.name} </td>
-                <td>Ksh{item.price}</td>
-                <td>
-                  <button className="remove-button" onClick={() => removeFromCart(item)}>Remove</button>
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <td colSpan={2} style={{ textAlign: 'right' }}>Total:</td>
-              <td>Ksh{total}</td>
-            </tr>
-          </tbody>
-        </table>
-      ) : (
-        <p>Your cart is empty.</p>
-      )}
-      {cartItems.length > 0 && (
-        <div>
-          <button className="checkout-button">Checkout</button>
-        </div>
-      )}
+          ))}
+        </tbody>
+      </table>
+      <div className='Total-txt'>
+         <p>Total Price: Ksh {totalPrice}</p>
+      </div>
     </div>
+          {/* Checkout Table */}
+          <div className="checkout-table">
+        <h3>Checkout</h3>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" placeholder='John Doe'/>
+        </div>
+        <div>
+          <label htmlFor="address">Address:</label>
+          <input type="text" id="address" />
+        </div>
+        <div>
+          <label htmlFor="payment-method">Payment Method:</label>
+          <select id="payment-method">
+            <option value="card">Card</option>
+            <option value="mpesa">M-pesa</option>
+            <option value="cash">Cash on Delivery</option>
+          </select>
+        </div>
+        <button className="proceed-button">Proceed</button>
+      </div>
+     <Footer/>
+    </>
+   
   );
 };
 
