@@ -2,7 +2,7 @@ import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom"; 
 import BannerBackground from "../assets/home-banner-background.png";
-import BannerImage from "../assets/home-banner-image.jpg";
+//import BannerImage from "../assets/home-banner-image.jpg";
 import "./styles/home.css";
 
 const Home = () => {
@@ -21,14 +21,14 @@ const Home = () => {
             form of love than the kind you get from your four-legged family.
             Here is a collection of adorable friends.
           </p>
-          <Link to="/products">
+          <Link to="/">
             <button className="secondary-button">
-              Explore More <FiArrowRight />
+              Adopt Now <FiArrowRight />
             </button>
           </Link>
         </div>
         <div className="home-image-container">
-          <img src={BannerImage} alt="" />
+          {/*<img src={BannerImage} alt="" />*/}
         </div>
       </div>
     </div>
