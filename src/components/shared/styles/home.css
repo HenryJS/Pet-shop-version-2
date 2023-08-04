@@ -4,12 +4,26 @@
   padding-top: 3rem;
 }
 
-.home-bannerImage-container {
+.home-bannerImage-container img {
   position: absolute;
   top: -100px;
   right: -170px;
   z-index: -1;
   max-width: 500px;
+  animation-name: dropIn;
+  animation-duration: 1s;
+  animation-delay: 0.2s; 
+  animation-fill-mode: both;
+}
+@keyframes dropIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .home-image-container {
@@ -21,7 +35,9 @@
 .home-image-container img {
   width: 100%;
   height: auto;
+  position: relative;
   border-radius: 35px;  
+  mix-blend-mode: color;
 }
 
 .home-image-section {
@@ -45,6 +61,21 @@
   font-size: clamp(2rem, 5vw, 4rem);
   color: #4c4c4c;
   max-width: 500px;
+  animation-name: slideInLeft;
+  animation-duration: 1s;
+  animation-delay: 0.5s; 
+  animation-fill-mode: both;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .primary-text {
@@ -52,12 +83,26 @@
   max-width: 500px;
   color: #6a6a6a;
   margin: 1.5rem 0rem;
-  
+  animation-name: slideInRight;
+  animation-duration: 1s;
+  animation-delay: 0.5s; 
+  animation-fill-mode: both;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .secondary-button {
   padding: 1rem 2.5rem;
-  background-color: #0f0e0c;
+  background-color: #d69514;
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -78,7 +123,7 @@
 }
 
 .secondary-button:hover {
-  background-color: #201d1775;
+  background-color: #e9820d;
 }
 /* Mobile view */
 @media (max-width: 768px) {
