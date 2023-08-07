@@ -1,69 +1,64 @@
-.home-banner-container {
-  position: relative;
+.home-container {
   display: flex;
-  padding-top: 3rem;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.home-bannerImage-container img {
-  position: absolute;
-  top: -100px;
-  right: -170px;
+.home-banner-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-banner-image-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
   z-index: -1;
-  max-width: 500px;
-  animation-name: dropIn;
+  animation-name: slideInFromTop;
   animation-duration: 1s;
   animation-delay: 0.2s; 
   animation-fill-mode: both;
+  margin-bottom: 50px;
+  margin-top: 40px;
 }
-@keyframes dropIn {
+
+@keyframes slideInFromTop {
   from {
     transform: translateY(-100%);
-    opacity: 0;
   }
   to {
     transform: translateY(0);
-    opacity: 1;
   }
-}
-
-.home-image-container {
-  position: relative;
-  width: 10%;
- 
-}
-
-.home-image-container img {
-  width: 100%;
-  height: auto;
-  position: relative;
-  border-radius: 35px;  
-  mix-blend-mode: color;
-}
-
-.home-image-section {
-  flex: 1;
 }
 
 .home-text-section {
+  position: relative;
   flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #fff; 
+  z-index: 1; 
 }
-@media (max-width:600px){
-  .home-text-section{
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+
 .primary-heading {
   font-size: clamp(2rem, 5vw, 4rem);
-  color: #4c4c4c;
+  color: #f5f2f2; 
   max-width: 500px;
+  align-items: left;
   animation-name: slideInLeft;
   animation-duration: 1s;
-  animation-delay: 0.5s; 
+  animation-delay: 0.5s;
   animation-fill-mode: both;
 }
 
@@ -81,11 +76,11 @@
 .primary-text {
   font-size: clamp(1rem, 3vw, 1.5rem);
   max-width: 500px;
-  color: #6a6a6a;
+  color: #ffffff;
   margin: 1.5rem 0rem;
   animation-name: slideInRight;
   animation-duration: 1s;
-  animation-delay: 0.5s; 
+  animation-delay: 0.5s;
   animation-fill-mode: both;
 }
 
@@ -102,15 +97,16 @@
 
 .secondary-button {
   padding: 1rem 2.5rem;
-  background-color: #d69514;
+  background-color: #f08204;
   outline: none;
   border: none;
   border-radius: 5rem;
   font-size: 1.1rem;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: dotted;
   font-weight: 600;
   color: white;
+  margin-top: 3rem;
   transition: 0.2s;
   display: flex;
   align-items: center;
@@ -125,32 +121,11 @@
 .secondary-button:hover {
   background-color: #e9820d;
 }
+
 /* Mobile view */
 @media (max-width: 768px) {
-  .home-banner-container {
-    flex-direction: column-reverse;
-    padding: 2rem 1rem;
-  }
-
-  .home-bannerImage-container {
-    top: 0;
-    right: 0;
-    max-width: 70%;
-    text-align: center;
-  }
-
-  .home-image-container {
-    width: 80%;
-    margin: 2rem auto;
-  }
-
-  .home-image-container img {
-    border-radius: 25px;
-  }
-
   .home-text-section {
-    text-align: center;
-    align-items: center;
+    padding: 1rem;
   }
 
   .primary-heading {
