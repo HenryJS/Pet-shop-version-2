@@ -1,0 +1,150 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-banner-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-banner-image-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  animation-name: slideInFromTop;
+  animation-duration: 1s;
+  animation-delay: 0.2s; 
+  animation-fill-mode: both;
+  margin-bottom: 50px;
+  margin-top: 40px;
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.home-text-section {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #fff; 
+  z-index: 1; 
+}
+
+.primary-heading {
+  font-size: clamp(2rem, 5vw, 4rem);
+  max-width: 500px;
+  align-items: left;
+  animation-name: slideInLeft;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.primary-text {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  max-width: 500px;
+  margin: 1.5rem 0rem;
+  animation-name: slideInRight;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.secondary-button {
+  padding: 1rem 2.5rem;
+  background-color: #f08204;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: dotted;
+  font-weight: 600;
+  color: white;
+  margin-top: 3rem;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-button svg {
+  margin-left: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.secondary-button:hover {
+  background-color: #e9820d;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .home-text-section {
+    padding: 1rem;
+  }
+
+  .primary-heading {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+
+  .primary-text {
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    max-width: 90%;
+    margin: 1rem auto;
+    color: black;
+  }
+
+  .secondary-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .secondary-button svg {
+    font-size: 1.2rem;
+  }
+}
