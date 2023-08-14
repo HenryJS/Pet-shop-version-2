@@ -3,6 +3,7 @@ import AboutBackground from "../assets/about-background.png";
 import AboutBackgroundImage from "../assets/contact_img.png";
 
 import "./style/breeds.css"
+import { NavLink } from 'react-router-dom';
 
  
 
@@ -27,9 +28,9 @@ const Breeds = () => {
                 "Ready to meet our adorable furry friends? Explore our delightful collection of pets on the Products page! Click below to embark on a heartwarming journey full of cuteness and joy! 🐾"
                 </p>
             <div className="about-buttons-container">
-                <button className="secondary-button"> "Begin Adventure!🐾"</button>
-                
-
+                <NavLink to="/products">
+                    <button className="secondary-button"> "Begin Adventure!🐾"</button>
+                </NavLink>
             </div>
 
             </div>
