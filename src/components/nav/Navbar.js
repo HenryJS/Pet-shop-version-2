@@ -1,17 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import React, { useState } from 'react';
+import Logo from "../assets/Logo.jpg";
 import MenuIcon from '@mui/icons-material/Menu';
-
-import { useCart } from "../products/cartcontext";
-import Logo from "../assets/logo.jpg";
-
 import './styles/Navbar.css';
 
 const Navbar = () => {
-  const { cartItems, totalPrice = 0 } = useCart(); 
-
-  const [isMobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -20,16 +13,13 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-logo-container">
-        <img src={Logo} alt='' />
+        <img src={Logo} alt=''/>
       </div>
-      <div className={`navbar-links-container ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
-      <Link to="/">Home</Link>
-      <Link to="/products">Available Breeds</Link>
-      <Link to="/testimonials">Testimonials</Link>
-        <Link to="/order-summary">
-          <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
-        </Link>
-        <button className="primary-button">John Henry</button>
+      <div className={`navbar-links-container ${isMobileMenuOpen ? "mobile-active" : ""}`}>
+        <a href="/">Home</a>
+        <a href="/">Available Breeds</a>
+        <a href="/">Testimonials</a>
+        <button className="primary-button">Login/sign-up</button>
       </div>
       <div className="menu-icon-container">
         <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
