@@ -3,7 +3,7 @@ import {BsTwitter} from "react-icons/bs";
 import {SiLinkedin} from "react-icons/si";
 import { BsYoutube } from "react-icons/bs";
 import { FaFacebookF} from "react-icons/fa";
-import Logo from "../assets/logo.jpg";
+import Logo from "../assets/Logo.jpg";
 import './styles/footer.css';
 
 export default function Footer(){
