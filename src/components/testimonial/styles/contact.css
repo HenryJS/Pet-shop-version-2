@@ -19,14 +19,15 @@
     border-radius: 5rem;
   }
   .contact-form-container input {
-    flex: 1;
+    flex: -1;
     height: 100%;
     border: none;
     outline: none;
     font-size: 1.3rem;
     padding: 0.5rem 1rem;
+  
   }
-  .secondary-button {
+  .secondary-button1 {
     padding: 1rem 2.5rem;
     background-color: #fe9e0d;
     outline: none;
@@ -51,7 +52,6 @@
   .primary-heading {
     font-size: clamp(2rem, 5vw, 4rem);
     color: #4c4c4c;
-    /* line-height: 5rem; */
     max-width: 600px;
   }
  

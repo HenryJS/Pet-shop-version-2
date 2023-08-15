@@ -9,7 +9,7 @@ const Contact = () => {
             <h1 className="primary-heading">Feel Free to Ask :)</h1>
             <div className="contact-form-container">
                 <input type="text"  placeholder="example@gmail.com"/>
-                <button className="secondary-button">Submit</button>
+                <button className="secondary-button1">Submit</button>
             </div>
         </div>
   

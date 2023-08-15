@@ -87,6 +87,11 @@
     font-size: 1.3rem;
     padding: 0.5rem 1rem;
   }
+  .cart-buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+  }
   .secondary-button {
     padding: 1rem 2.5rem;
     background-color: #fe9e0d;

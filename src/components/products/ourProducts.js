@@ -38,10 +38,10 @@ const ProductsPage = () => {
   const renderCartButtons = (product) => {
     const productId = product.id;
     const quantityInCart = getProductQuantityInCart(productId);
-    
+  
     if (isProductInCart(productId)) {
       return (
-        <div>
+        <div className="cart-buttons-container">
           <button className="secondary-button" onClick={() => decreaseQuantity(product)}>
             <RemoveIcon />
           </button>
@@ -62,7 +62,6 @@ const ProductsPage = () => {
       );
     }
   };
-
   return (
     <div>
       <Navbar cartItems={cartItems} totalPrice={totalPrice} />
