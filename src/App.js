@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -6,6 +5,7 @@ import ProductsPage from "./pages/product.page";
 import OrderSummary from "./components/products/OrderSummary";
 import { CartProvider } from './components/products/cartcontext'; 
 import Homepage from './pages/home.page';
+import Testimonial from './components/testimonial/testimonial';
 
 function App() {
   return (
@@ -23,6 +23,10 @@ function App() {
           <Route
             path="/order-summary"
             element={<OrderSummary />}
+          />
+           <Route
+            path="/testimonials"
+            element={<Testimonial />}
           />
         </Routes>
       </Router>

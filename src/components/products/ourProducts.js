@@ -65,7 +65,7 @@ const ProductsPage = () => {
   return (
     <div>
       <Navbar cartItems={cartItems} totalPrice={totalPrice} />
-      <header className="header">
+      <header className="header" id="top">
         <h1>Our Products</h1>
       </header>
 

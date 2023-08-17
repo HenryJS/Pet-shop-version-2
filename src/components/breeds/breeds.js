@@ -1,15 +1,17 @@
 import React from 'react';
 import AboutBackground from "../assets/about-background.png";
 import AboutBackgroundImage from "../assets/contact_img.png";
-
 import "./style/breeds.css"
 import { NavLink } from 'react-router-dom';
 
- 
-
-
+const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" 
+    });
+  };
 const Breeds = () => {
-  return <div className="about-section-container">
+  return  <div className="about-section-container" id="breeds">
             <div className="about-background-image-container">
                 <img src={AboutBackground} alt="" />
             </div> 
@@ -28,9 +30,9 @@ const Breeds = () => {
                 "Ready to meet our adorable furry friends? Explore our delightful collection of pets on the Products page! Click below to embark on a heartwarming journey full of cuteness and joy! 🐾"
                 </p>
             <div className="about-buttons-container">
-                <NavLink to="/products">
-                    <button className="secondary-button"> "Begin Adventure!🐾"</button>
-                </NavLink>
+            <NavLink to="/products" onClick={scrollToTop}>
+                <button className="secondary-button"> Begin Adventure!🐾</button>
+            </NavLink>
             </div>
 
             </div>

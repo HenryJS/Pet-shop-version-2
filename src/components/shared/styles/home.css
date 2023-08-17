@@ -128,7 +128,7 @@
   .home-text-section {
     padding: 1rem;
   }
-
+ 
   .primary-heading {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     max-width: 90%;

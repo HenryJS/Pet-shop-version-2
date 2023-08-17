@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import { useCart } from "../products/cartcontext";
 import Logo from "../assets/Logo.jpg";
 
@@ -22,10 +22,10 @@ const Navbar = () => {
     if (location.pathname === '/') {
       return 'Login/Signup';
     } else if (location.pathname === '/products') {
-      return 'John Henry';
+      return 'Hi there :)';
     }
 
-    return 'John Henry'; 
+    return 'Hi There!'; 
   };
 
   return (
@@ -36,7 +36,9 @@ const Navbar = () => {
       <div className={`navbar-links-container ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
         <Link to="/">Home</Link>
         <Link to="/products">Available Breeds</Link>
-        <Link to="/testimonials">Testimonials</Link>
+        <ScrollLink to="testimonials" smooth={true} duration={500}>
+          Testimonials
+        </ScrollLink>
         <Link to="/order-summary">
           <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
         </Link>

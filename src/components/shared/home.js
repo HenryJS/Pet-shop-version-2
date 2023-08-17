@@ -1,6 +1,6 @@
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link as ScrollLink } from 'react-scroll';
 import BannerBackground from "../assets/home3.jpg";
 import "./styles/home.css";
 
@@ -18,11 +18,11 @@ const Home = () => {
             form of love than the kind you get from your four-legged family.
             Here is a collection of adorable friends.
           </p>
-          <Link to="/">
-            <button className="secondary-button">
-              Adopt Now <FiArrowRight />
-            </button>
-          </Link>
+          <ScrollLink to="breeds" smooth={true} duration={500}>
+        <button className="secondary-button">
+          Adopt Now <FiArrowRight />
+        </button>
+      </ScrollLink>
         </div>
       </div>
     </div>

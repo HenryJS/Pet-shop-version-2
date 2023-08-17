@@ -1,4 +1,4 @@
-import Summary from "../components/products/OrderSummary"
+import Summary from "../components/products/OrderSummary";
 
 export default function Product(){
     return(
