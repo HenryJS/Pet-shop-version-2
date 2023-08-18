@@ -1,31 +1,87 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Link as ScrollLink } from 'react-scroll'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import MenuIcon from '@mui/icons-material/Menu'
-import { useCart } from "../products/cartcontext"
-import Logo from "../assets/Logo.jpg"
-import './styles/Navbar.css'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useCart } from '../products/cartcontext';
+import Logo from '../assets/Logo.jpg';
+import AuthDetails from './authdetails';
+import './styles/Navbar.css';
 
 const Navbar = () => {
   const { cartItems, totalPrice = 0 } = useCart();
-  const location = useLocation();
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeForm, setActiveForm] = useState(null); 
+  const [activeForm, setActiveForm] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [user, setUser] = useState(auth.currentUser);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const getButtonLabel = () => {
-    if (location.pathname === '/') {
-      return 'Login/Signup';
-    } else if (location.pathname === '/products') {
-      return 'Hi there :)';
+    if (user) {
+      return user.displayName || user.email;
     }
+    return 'Login/Signup';
+  };
 
-    return 'Hi There!';
+  const handleAuthAction = (e) => {
+    e.preventDefault();
+    if (user) {
+      handleSignOut();
+    } else {
+      setActiveForm(activeForm === 'login' ? null : 'login');
+    }
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('User signed out successfully');
+        setUser(null);
+      })
+      .catch((error) => {
+        console.error('Sign Out Error:', error);
+      });
+  };
+
+  const getIntroText = () => {
+    if (user) {
+      const name = user.displayName || user.email;
+      return `Welcome, ${name}!`;
+    }
+    return null;
+  };
+
+  const signIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        setUser(userCredential.user);
+        setActiveForm(null); 
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const signUp = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        setUser(userCredential.user);
+      })
+      .catch((error) => {
+        console.error("Firebase Sign Up Error:", error);
+      });
   };
 
   return (
@@ -42,20 +98,39 @@ const Navbar = () => {
         <Link to="/order-summary">
           <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
         </Link>
-        <button className="primary-button" onClick={() => setActiveForm(activeForm === 'login' ? null : 'login')}>
+        <button className="primary-button" onClick={handleAuthAction}>
           {getButtonLabel()}
         </button>
       </div>
       <div className="menu-icon-container">
         <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
       </div>
+      
+      <div className="auth-details">
+        <AuthDetails user={user} />
+        {user ? (
+          <>
+            <p>{getIntroText()}</p>
+            <button className="sign-out-button" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          </>
+        ) : null}
+      </div>
+
       <div className={`auth-form ${activeForm ? 'active' : ''}`}>
         {activeForm === 'login' && (
           <div>
             <h2>Login</h2>
-            <form>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+            <form onSubmit={signIn}>
+              <input type="email" placeholder="Email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input type="password" placeholder="Password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <button type="submit">Login</button>
             </form>
             <p>Don't have an account? <span onClick={() => setActiveForm('signup')}>Sign Up</span></p>
@@ -63,10 +138,20 @@ const Navbar = () => {
         )}
         {activeForm === 'signup' && (
           <div>
-            <h2>Sign Up</h2>
-            <form>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+            <h2>Create an Account </h2>
+            <form onSubmit={signUp}>
+              <input type="email" placeholder="Email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+              />
+               <input type="text" placeholder="User Name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+               />
+              <input type="password" placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+               />
               <button type="submit">Sign Up</button>
             </form>
             <p>Already have an account? <span onClick={() => setActiveForm('login')}>Login</span></p>
