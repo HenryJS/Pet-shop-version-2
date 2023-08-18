@@ -46,16 +46,6 @@
   object-fit: cover;
 }
 
-.order-summary-table th:nth-child(1),
-.order-summary-table td:nth-child(1),
-.order-summary-table th:nth-child(2),
-.order-summary-table td:nth-child(2),
-.order-summary-table th:nth-child(3),
-.order-summary-table td:nth-child(3),
-.order-summary-table th:nth-child(4),
-.order-summary-table td:nth-child(4) {
-  width: 10px;
-}
 .order-summary-table th {
   text-align: left;
   background-color: #f2f2f2;

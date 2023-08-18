@@ -126,7 +126,7 @@
 /* Mobile view */
 @media (max-width: 768px) {
   .home-text-section {
-    padding: 1rem;
+    padding: 4rem;
   }
  
   .primary-heading {

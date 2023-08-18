@@ -54,4 +54,32 @@
     color: #4c4c4c;
     max-width: 600px;
   }
- 
+  @media (max-width: 600px){
+    .secondary-button1 {
+      padding: 1rem;
+      background-color: #fe9e0d;
+      outline: none;
+      border: none;
+      border-radius: 5rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: white;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: auto;
+      position: inherit;
+    }
+    .contact-form-container input {
+      flex: -1;
+      height: 100%;
+      border: none;
+      outline: none;
+      font-size: 1.3rem;
+      padding: 0.5rem 0 0 0;
+      margin-right: auto;
+      
+    }
+  }

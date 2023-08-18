@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../products/cartcontext'; 
+import { useCart } from  '../products/cartcontext'; 
 import Navbar from '../nav/Navbar';
 import Footer from '../footer/footer';
 import './style/summary.css'; 
@@ -13,38 +13,40 @@ const OrderSummary = () => {
 
   return (
     <>
-    <Navbar/>
-     <div className="order-summary-container">
-      <h2>Order Summary</h2>
-      <table className="order-summary-table">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItems.map((item) => (
-            <tr key={item.id}>
-              <td>
-                <img src={item.image} alt={item.name} className="product-image" />
-              </td>
-              <td>{item.name}</td>
-              <td>Ksh {item.price}</td>
-              <td>
-                <button className='remove-button' onClick={() => handleRemoveItem(item)}>Remove</button>
-              </td>
+      <Navbar/>
+      <div className="order-summary-container">
+        <h2>Order Summary</h2>
+        <table className="order-summary-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th> 
+              <th>Remove</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className='Total-txt'>
-         <p>Total Price: Ksh {totalPrice}</p>
+          </thead>
+          <tbody>
+            {cartItems.map((item) => (
+              <tr key={item.id}>
+                <td>
+                  <img src={item.image} alt={item.name} className="product-image" />
+                </td>
+                <td>{item.name}</td>
+                <td>Ksh {item.price}</td>
+                <td>{item.quantity}</td> 
+                <td>
+                  <button className='remove-button' onClick={() => handleRemoveItem(item)}>Remove</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className='Total-txt'>
+          <p>Total Price: Ksh {totalPrice}</p>
+        </div>
       </div>
-    </div>
-          <div className="checkout-table">
+      <div className="checkout-table">
         <h3>Checkout</h3>
         <div>
           <label htmlFor="name">Name:</label>
@@ -64,9 +66,8 @@ const OrderSummary = () => {
         </div>
         <button className="proceed-button">Proceed</button>
       </div>
-     <Footer/>
+      <Footer/>
     </>
-   
   );
 };
 

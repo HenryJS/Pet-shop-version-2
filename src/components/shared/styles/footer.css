@@ -46,3 +46,42 @@ img {
   color: #4c4c4c;
   cursor: pointer;
 }
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .footer-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
+  }
+
+  .footer-logo-container {
+    max-width: 80px;
+    width: 80px;
+    height: 80px;
+    top: 0;
+    display: flex;
+  }
+
+  .footer-icons {
+    margin-top: 1rem;
+    display: flex;
+  }
+  
+  .footer-icons svg {
+    font-size: 1.8rem;
+    margin-right: 8px;
+    display: flex; 
+  }
+
+  .footer-section-columns {
+    min-width: auto;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    align-items: flex-start; 
+    
+  }
+  .footer-section-two{
+    display: block;
+    align-items: flex-start;
+  }
+}
