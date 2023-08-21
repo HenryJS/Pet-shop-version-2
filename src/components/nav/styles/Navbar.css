@@ -57,11 +57,23 @@ nav {
   top: 70px;
   right: 1px;
   z-index: 1000;
-  transition: opacity 1s, height 0.8s;
+  transition: opacity 1s, height 0.3s;
   opacity: 0; 
   height: 0; 
 }
+.auth-details p {
+  margin-right: 10px; 
+  align-self: auto;
+}
 
+.sign-out-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .auth-form.active {
   opacity: 1; 
   height: auto; 
@@ -94,7 +106,11 @@ nav {
 .primary-button:hover{
   background-color: #e76f2a;
 }
-
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
 
 /* Mobile Menu Container */
 @media (max-width: 800px) {
@@ -107,17 +123,17 @@ nav {
    
   }
   .navbar-links-container.mobile-active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 90px;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 2;
-    border-radius: 20px;
-    transition: opacity 1.5s ease;   
+        display: flex;
+      flex-direction: column; /* Stack mobile links vertically */
+      position: absolute;
+      top: 60px; /* Adjust the top spacing */
+      left: 0;
+      background-color: white;
+      width: 100%;
+      border: 1px solid #ccc;
+      z-index: 2;
+      padding: 10px;
+      transition: opacity 1.5s ease;   
   }
   .navbar-links-container a {
     margin: 1rem;

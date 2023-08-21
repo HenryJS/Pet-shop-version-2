@@ -19,6 +19,7 @@ const Navbar = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [user, setUser] = useState(auth.currentUser);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -57,33 +58,34 @@ const Navbar = () => {
     }
     return null;
   };
-
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
         setUser(userCredential.user);
-        setActiveForm(null); 
+        setActiveForm(null);
+        setLoginErrorMessage(''); 
       })
       .catch((error) => {
         console.log(error);
+        setLoginErrorMessage('Invalid email or password'); 
       });
   };
 
-  const signUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-        setUser(userCredential.user);
-        setUsername(username);
-        setActiveForm(null); 
-      })
-      .catch((error) => {
-        console.error("Firebase Sign Up Error:", error);
-      });
-  };
+const signUp = (e) => {
+  e.preventDefault();
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential);
+      setUser(userCredential.user);
+      setUsername(username); 
+      setActiveForm(null); 
+    })
+    .catch((error) => {
+      console.error("Firebase Sign Up Error:", error);
+    });
+};
 
   return (
     <nav>
@@ -134,6 +136,7 @@ const Navbar = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button type="submit">Login</button>
+              {loginErrorMessage && <p className="error-message">{loginErrorMessage}</p>}
             </form>
             <p>Don't have an account? <span onClick={() => setActiveForm('signup')}>Sign Up</span></p>
           </div>
