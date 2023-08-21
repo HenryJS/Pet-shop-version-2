@@ -53,8 +53,7 @@ const Navbar = () => {
 
   const getIntroText = () => {
     if (user) {
-      const name = user.displayName || user.email;
-      return `Welcome, ${name}!`;
+      return `Welcome, ${username || user.email}!`;
     }
     return null;
   };
@@ -78,6 +77,8 @@ const Navbar = () => {
       .then((userCredential) => {
         console.log(userCredential);
         setUser(userCredential.user);
+        setUsername(username);
+        setActiveForm(null); 
       })
       .catch((error) => {
         console.error("Firebase Sign Up Error:", error);
@@ -87,37 +88,38 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-logo-container">
-        <img src={Logo} alt='' />
-      </div>
-      <div className={`navbar-links-container ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
-        <Link to="/">Home</Link>
-        <Link to="/products">Available Breeds</Link>
-        <ScrollLink to="testimonials" smooth={true} duration={500}>
-          Testimonials
-        </ScrollLink>
-        <Link to="/order-summary">
-          <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
-        </Link>
+      <img src={Logo} alt='' />
+    </div>
+    <div className={`navbar-links-container ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
+      <Link to="/">Home</Link>
+      <Link to="/products">Available Breeds</Link>
+      <ScrollLink to="testimonials" smooth={true} duration={500}>
+        Testimonials
+      </ScrollLink>
+      <Link to="/order-summary">
+        <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
+      </Link>
+      {!user ? (
         <button className="primary-button" onClick={handleAuthAction}>
-          {getButtonLabel()}
+          Login/Signup
         </button>
-      </div>
-      <div className="menu-icon-container">
-        <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
-      </div>
-      
-      <div className="auth-details">
-        <AuthDetails user={user} />
-        {user ? (
-          <>
-            <p>{getIntroText()}</p>
-            <button className="sign-out-button" onClick={handleSignOut}>
-              Sign Out
-            </button>
-          </>
-        ) : null}
-      </div>
-
+      ) : null}
+    </div>
+    <div className="menu-icon-container">
+      <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
+    </div>
+    
+    <div className="auth-details">
+  <AuthDetails user={user} username={username} /> 
+      {user ? (
+        <>
+          <p>{getIntroText()}</p>
+          <button className="sign-out-button" onClick={handleSignOut}>
+            Sign Out
+          </button>
+        </>
+      ) : null}
+    </div>
       <div className={`auth-form ${activeForm ? 'active' : ''}`}>
         {activeForm === 'login' && (
           <div>
