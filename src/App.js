@@ -6,6 +6,9 @@ import OrderSummary from "./components/products/OrderSummary";
 import { CartProvider } from './components/products/cartcontext'; 
 import Homepage from './pages/home.page';
 import Testimonial from './components/testimonial/testimonial';
+import Login from './pages/login.page';
+import SignUp from './pages/signup.page'
+
 
 function App() {
   return (
@@ -27,6 +30,14 @@ function App() {
            <Route
             path="/testimonials"
             element={<Testimonial />}
+          />
+           <Route
+            path="/login"
+            element={<Login />}
+          />
+           <Route
+            path="/signup"
+            element={<SignUp/>}
           />
         </Routes>
       </Router>

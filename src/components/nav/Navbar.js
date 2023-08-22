@@ -1,32 +1,42 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Link as ScrollLink } from 'react-scroll'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import MenuIcon from '@mui/icons-material/Menu'
-import { useCart } from "../products/cartcontext"
-import Logo from "../assets/Logo.jpg"
-import './styles/Navbar.css'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
+import { useCart } from '../products/cartcontext';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MenuIcon from '@mui/icons-material/Menu';
+import Logo from '../assets/Logo.jpg';
+import { auth } from '../../firebase'; // Import your firebase auth object
+import './styles/Navbar.css';
+import { LoginModal } from '../authentication/LoginModal'; // Adjust the path based on your folder structure
+import { SignupModal } from '../authentication/SignupModal';
 
 const Navbar = () => {
   const { cartItems, totalPrice = 0 } = useCart();
-  const location = useLocation();
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeForm, setActiveForm] = useState(null); 
+  const [user, setUser] = useState(null); // State to track authenticated user
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+
+  auth.onAuthStateChanged((user) => {
+    setUser(user); // Update user state when authentication state changes
+  });
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const getButtonLabel = () => {
-    if (location.pathname === '/') {
-      return 'Login/Signup';
-    } else if (location.pathname === '/products') {
-      return 'Hi there :)';
-    }
-
-    return 'Hi There!';
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
   };
+
+ 
+
+  const handleModalClose = () => {
+    setShowLoginModal(false);
+    setShowSignupModal(false);
+  };
+
 
   return (
     <nav>
@@ -42,37 +52,26 @@ const Navbar = () => {
         <Link to="/order-summary">
           <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
         </Link>
-        <button className="primary-button" onClick={() => setActiveForm(activeForm === 'login' ? null : 'login')}>
-          {getButtonLabel()}
-        </button>
       </div>
       <div className="menu-icon-container">
         <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
       </div>
-      <div className={`auth-form ${activeForm ? 'active' : ''}`}>
-        {activeForm === 'login' && (
+     
+      {!user && (
+        <>
           <div>
-            <h2>Login</h2>
-            <form>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <span onClick={() => setActiveForm('signup')}>Sign Up</span></p>
+            {/*  additional components/UI  */}
           </div>
-        )}
-        {activeForm === 'signup' && (
           <div>
-            <h2>Sign Up</h2>
-            <form>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <button type="submit">Sign Up</button>
-            </form>
-            <p>Already have an account? <span onClick={() => setActiveForm('login')}>Login</span></p>
+            <button className='navlink' onClick={handleLoginClick}>
+              LOGIN
+            </button>
           </div>
-        )}
-      </div>
+        </>
+      )}
+
+      {showLoginModal && <LoginModal show={showLoginModal} onClose={handleModalClose} />}
+      {showSignupModal && <SignupModal show={showSignupModal} onClose={handleModalClose} />}
     </nav>
   );
 };
