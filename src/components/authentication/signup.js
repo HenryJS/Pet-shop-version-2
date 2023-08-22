@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import InputControl from "./inputcontrol/inputControl";
 import { auth } from "../../firebase";
 
-import styles from "./style/signup.css";
+import  "./style/signup.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -41,9 +41,9 @@ function Signup() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.innerBox}>
-        <h1 className={styles.heading}>Signup</h1>
+    <div className='container'>
+      <div className='innerBox'>
+        <h1 className='heading'>Signup</h1>
 
         <InputControl
           label="Name"
@@ -67,8 +67,8 @@ function Signup() {
           }
         />
 
-        <div className={styles.footer}>
-          <b className={styles.error}>{errorMsg}</b>
+        <div className='footer'>
+          <b className='error'>{errorMsg}</b>
           <button onClick={handleSubmission} disabled={submitButtonDisabled}>
             Signup
           </button>

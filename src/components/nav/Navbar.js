@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { useCart } from '../products/cartcontext';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -8,13 +8,12 @@ import Logo from '../assets/Logo.jpg';
 import { auth } from '../../firebase';
 import './styles/Navbar.css';
 
-
-
 const Navbar = () => {
   const { cartItems, totalPrice = 0 } = useCart();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null); // State to track authenticated user
-  
+  const navigate = useNavigate(); // Use the useNavigate hook
+
   auth.onAuthStateChanged((user) => {
     setUser(user); // Update user state when authentication state changes
   });
@@ -22,7 +21,6 @@ const Navbar = () => {
   const handleLogout = () => {
     auth.signOut(); // Sign out the user
   };
-
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -48,14 +46,16 @@ const Navbar = () => {
         <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
       </div>
 
-          {user ? (
-             <div className="user-welcome">
-             Welcome, {user.displayName}
-             <button className='logout' onClick={handleLogout}>Logout</button>
-           </div>
-         ) : (
-           <Link to="/login">Login</Link>
-          )}
+      {user ? (
+        <div className="user-welcome">
+          Welcome, {user.displayName}
+          <button className='logout' onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <button className="primary-button" onClick={() => navigate('/login')}>
+          Login
+        </button>
+      )}
     </nav>
   );
 };

@@ -13,6 +13,7 @@ import Navbar from './components/nav/Navbar';
 
 function App() {
   const [user, setUser] = useState(null); // Initialize user state
+   
   return (
     <CartProvider> 
       <Router>

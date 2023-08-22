@@ -6,7 +6,6 @@ import GS3 from "../assets/gs3.jpg";
 import GS4 from "../assets/gs4.jpg";
 import Horse1 from "../assets/horse1.jpg";
 import Footer from "../footer/footer";
-import Navbar from '../nav/Navbar';
 import { useCart } from '../products/cartcontext'; 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -15,7 +14,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './style/products.css';
 
 const ProductsPage = () => {
-  const { cartItems, totalPrice, addToCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart(); 
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart(); 
+
+
 
   const products = [
     { id: 1, name: "Japanese Spitz", image: Dog1, price: 10000 },
@@ -64,7 +65,7 @@ const ProductsPage = () => {
   };
   return (
     <div>
-      <Navbar cartItems={cartItems} totalPrice={totalPrice} />
+      
       <header className="header" id="top">
         <h1>Our Products</h1>
       </header>
@@ -79,7 +80,6 @@ const ProductsPage = () => {
           </div>
         ))}
       </div>
-     
       <div>
         <Footer />
       </div>

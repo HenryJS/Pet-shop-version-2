@@ -18,7 +18,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 90px;
+  min-height: 70px;
+  
 }
 .navbar-links-container a {
   margin-right: 3rem;

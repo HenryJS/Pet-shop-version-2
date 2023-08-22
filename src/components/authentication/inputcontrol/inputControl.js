@@ -1,10 +1,10 @@
 import React from "react";
 
-import styles from "../inputcontrol/inputControl.css";
+import "../inputcontrol/inputControl.css";
 
 function InputControl(props) {
   return (
-    <div className={styles.container}>
+    <div className='containers'>
       {props.label && <label>{props.label}</label>}
       <input type="text" {...props} />
     </div>
