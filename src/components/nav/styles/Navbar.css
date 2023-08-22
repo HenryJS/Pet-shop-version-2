@@ -1,9 +1,4 @@
-.App{
-  width: 85vh !important;
-  min-height: 100vh;
-  max-width: 1900px;
-  margin: 0rem auto;
-}
+
 img {
   max-width: 100%;
   height: auto;
@@ -43,6 +38,26 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
+}
+
+.logout{
+  padding: 0.9rem 1.75rem;
+  background-color: rgb(245, 138, 138);
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.user-welcome{
+  padding-right: 5px;
+  font-size: 20px;
+}
+
+.logout:hover {
+  background-color: rgb(234, 234, 234);
 }
 .primary-button:hover {
   background-color: rgb(234, 234, 234);

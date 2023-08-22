@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { signInWithEmailAndPassword } from "firebase/auth"
 import InputControl from "./inputcontrol/inputControl";
 import { auth } from "../../firebase";
 
-import styles from "./style/login.css";
+import  "./style/login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -36,9 +35,9 @@ function Login() {
       });
   };
   return (
-    <div className={styles.container}>
-      <div className={styles.innerBox}>
-        <h1 className={styles.heading}>Login</h1>
+    <div className="container">
+      <div className="innerBox">
+        <h1 className='heading'>Login</h1>
 
         <InputControl
           label="Email"
@@ -55,8 +54,8 @@ function Login() {
           placeholder="Enter Password"
         />
 
-        <div className={styles.footer}>
-          <b className={styles.error}>{errorMsg}</b>
+        <div className='footer'>
+          <b className='error'>{errorMsg}</b>
           <button disabled={submitButtonDisabled} onClick={handleSubmission}>
             Login
           </button>

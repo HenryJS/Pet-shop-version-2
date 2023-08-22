@@ -5,8 +5,9 @@ import { useCart } from '../products/cartcontext';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../assets/Logo.jpg';
-import { auth } from '../../firebase'; // Import your firebase auth object
+import { auth } from '../../firebase';
 import './styles/Navbar.css';
+
 
 
 const Navbar = () => {
@@ -17,6 +18,11 @@ const Navbar = () => {
   auth.onAuthStateChanged((user) => {
     setUser(user); // Update user state when authentication state changes
   });
+
+  const handleLogout = () => {
+    auth.signOut(); // Sign out the user
+  };
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -37,18 +43,19 @@ const Navbar = () => {
           <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
         </Link>
       </div>
+
       <div className="menu-icon-container">
         <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
       </div>
-     
-       {/* Conditionally render Login button or user's name */}
-          {user ? (
-            <span>Welcome, {user.displayName}</span>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
 
-     
+          {user ? (
+             <div className="user-welcome">
+             Welcome, {user.displayName}
+             <button className='logout' onClick={handleLogout}>Logout</button>
+           </div>
+         ) : (
+           <Link to="/login">Login</Link>
+          )}
     </nav>
   );
 };
