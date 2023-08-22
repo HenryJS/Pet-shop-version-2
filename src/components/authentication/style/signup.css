@@ -1,70 +1,70 @@
-/* src/components/style/signup.css */
+.container {
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(to right, #9900ff, #cc80ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #fae4e4;
-  }
-  
-  .signup-form {
-    background-color: #ffffff;
-    border-radius: 24px;
-    padding: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    text-align: center;
-  }
-  
-  .signup-form h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-  }
-  
-  .signup-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 2px solid #f3dbb2;
-    border-radius: 24px;
-    font-size: 16px;
-  }
-  
-  .password-input {
-    position: relative;
-  }
-  
-  .password-input input {
-    padding-right: 40px;
-  }
-  
-  .toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #999;
-  }
-  
-  .error-message {
-    color: #ff0000;
-    margin-top: 8px;
-  }
-  
-  button {
-    background-color: #ffa500;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 24px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #ff7f00;
-  }
-  
+.innerBox {
+  min-width: 480px;
+  height: fit-content;
+  width: fit-content;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer .error {
+  font-weight: bold;
+  font-size: 0.875rem;
+  color: #ff3300;
+  text-align: center;
+}
+
+.footer button {
+  outline: none;
+  border: none;
+  background-color: #9900ff;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 16px;
+  width: 100%;
+  transition: 100ms;
+  cursor: pointer;
+}
+
+.footer button:disabled {
+  background-color: gray !important;
+}
+
+.footer button:hover {
+  background-color: #aa2aff;
+}
+
+.footer p {
+  font-weight: 700;
+  color: #000;
+}
+
+.footer p span a {
+  font-weight: bold;
+  color: #9900ff;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  text-decoration: none;
+}

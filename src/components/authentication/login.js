@@ -1,79 +1,75 @@
-import React, { useState, useEffect} from 'react';
-import { auth } from '../../firebase'; // Import the auth object from your firebase.js
-import { Link } from 'react-router-dom';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import './style/login.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  
+import InputControl from "./inputcontrol/inputControl";
+import { auth } from "../../firebase";
 
-  useEffect(() => {
-    localStorage.removeItem('loginSuccess');
-  }, []);
+import styles from "./style/login.css";
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setErrorMessage(''); // Clear any previous error message
-    
-    auth.signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log('User logged in:', userCredential.user);
-        localStorage.setItem('loginSuccess', 'true');
+function Login() {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    email: "",
+    pass: "",
+  });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  const handleSubmission = () => {
+    if (!values.email || !values.pass) {
+      setErrorMsg("Fill all fields");
+      return;
+    }
+    setErrorMsg("");
+
+    setSubmitButtonDisabled(true);
+    signInWithEmailAndPassword(auth, values.email, values.pass)
+      .then(async (res) => {
+        setSubmitButtonDisabled(false);
+        
+        navigate("/");
       })
-      .catch((error) => {
-        console.error('Login Error:', error);
-        setErrorMessage(error.message);
-        localStorage.removeItem('loginSuccess');
+      .catch((err) => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg(err.message);
       });
   };
-  
-
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleLogin}>
-        <h2>Login</h2>
-        <input className='input'
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <div className='password-input'>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {showPassword ? (
-            <VisibilityOff
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          ) : (
-            <Visibility
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          )}
-        </div>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <button type="submit">Login</button>
-        <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-        {localStorage.getItem('signupSuccess') === 'true' && (
-          <p className="success-message">New user added successfully!</p>
-        )}
-        {localStorage.getItem('loginSuccess') === 'true' && (
-          <p className="success-message">Logged in successfully!</p>
-        )}
+    <div className={styles.container}>
+      <div className={styles.innerBox}>
+        <h1 className={styles.heading}>Login</h1>
 
-      </form>
+        <InputControl
+          label="Email"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, email: event.target.value }))
+          }
+          placeholder="Enter email address"
+        />
+        <InputControl
+          label="Password"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, pass: event.target.value }))
+          }
+          placeholder="Enter Password"
+        />
+
+        <div className={styles.footer}>
+          <b className={styles.error}>{errorMsg}</b>
+          <button disabled={submitButtonDisabled} onClick={handleSubmission}>
+            Login
+          </button>
+          <p>
+            Already have an account?{" "}
+            <span>
+              <Link to="/signup">Sign up</Link>
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default Login;
