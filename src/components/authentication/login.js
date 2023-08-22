@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth"
 import InputControl from "./inputcontrol/inputControl";
 import { auth } from "../../firebase";
+import Navbar from "../nav/Navbar";
 
 import  "./style/login.css";
 
@@ -35,7 +36,10 @@ function Login() {
       });
   };
   return (
-    <div className="container">
+    <>
+    <Navbar />
+<div className="container">
+      
       <div className="innerBox">
         <h1 className='heading'>Login</h1>
 
@@ -68,6 +72,8 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
+    
   );
 }
 

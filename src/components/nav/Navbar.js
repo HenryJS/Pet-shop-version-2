@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 import { Link as ScrollLink } from 'react-scroll';
 import { useCart } from '../products/cartcontext';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -11,15 +11,14 @@ import './styles/Navbar.css';
 const Navbar = () => {
   const { cartItems, totalPrice = 0 } = useCart();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState(null); // State to track authenticated user
-  const navigate = useNavigate(); // Use the useNavigate hook
+  const [user, setUser] = useState(null);
 
   auth.onAuthStateChanged((user) => {
-    setUser(user); // Update user state when authentication state changes
+    setUser(user);
   });
 
   const handleLogout = () => {
-    auth.signOut(); // Sign out the user
+    auth.signOut();
   };
 
   const toggleMobileMenu = () => {
@@ -52,9 +51,9 @@ const Navbar = () => {
           <button className='logout' onClick={handleLogout}>Logout</button>
         </div>
       ) : (
-        <button className="primary-button" onClick={() => navigate('/login')}>
+        <Link to="/login" className="primary-button">
           Login
-        </button>
+        </Link>
       )}
     </nav>
   );
