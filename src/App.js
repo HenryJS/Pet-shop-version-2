@@ -8,7 +8,7 @@ import Homepage from './pages/home.page';
 import Testimonial from './components/testimonial/testimonial';
 import Login from './pages/login.page';
 import SignUp from './pages/signup.page'
-
+import AddProducts from './components/products/AddProducts';
 
 
 function App() {
@@ -42,6 +42,10 @@ function App() {
            <Route
             path="/signup"
             element={<SignUp/>}
+          />
+           <Route
+            path="/add"
+            element={<AddProducts />}
           />
         </Routes>
       </Router>

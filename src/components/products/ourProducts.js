@@ -11,11 +11,12 @@ import { useCart } from '../products/cartcontext';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { auth, db } from '../../firebase'; 
 
 import './style/products.css';
 
 const ProductsPage = () => {
-  const { cartItems, totalPrice, addToCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart(); 
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart(); 
 
   const products = [
     { id: 1, name: "Japanese Spitz", image: Dog1, price: 10000 },
@@ -33,6 +34,24 @@ const ProductsPage = () => {
   const getProductQuantityInCart = (productId) => {
     const cartItem = cartItems.find(item => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
+  };
+
+  const handleAddToCart = async (product) => {
+    const userId = auth.currentUser.uid;
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      quantity: 1,
+      price: product.price,
+    };
+
+    try {
+      // Add the cart item to Firestore
+      await db.collection('users').doc(userId).collection('cart').add(cartItem);
+      addToCart(product); // Update local cart state
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
   };
 
   const renderCartButtons = (product) => {
@@ -56,19 +75,16 @@ const ProductsPage = () => {
       );
     } else {
       return (
-        <button className="secondary-button" onClick={() => addToCart(product)}>
+        <button className="secondary-button" onClick={() => handleAddToCart(product)}>
           Add to Cart
         </button>
       );
     }
   };
+
   return (
     <div>
-      <Navbar cartItems={cartItems} totalPrice={totalPrice} />
-      <header className="header" id="top">
-        <h1>Our Products</h1>
-      </header>
-
+     <Navbar />
       <div className="product-container">
         {products.map((product) => (
           <div className="product" key={product.id}>
@@ -79,12 +95,14 @@ const ProductsPage = () => {
           </div>
         ))}
       </div>
-     
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
 
 export default ProductsPage;
+
+
+
+
+

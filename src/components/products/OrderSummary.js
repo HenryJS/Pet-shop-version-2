@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from  '../products/cartcontext'; 
+import { useCart } from  './cartcontext'; 
 import Footer from '../footer/footer';
 import './style/summary.css'; 
 
@@ -12,7 +12,6 @@ const OrderSummary = () => {
 
   return (
     <>
-    
       <div className="order-summary-container">
         <h2>Order Summary</h2>
         <table className="order-summary-table">
