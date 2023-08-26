@@ -23,10 +23,7 @@ function App() {
             element={<Homepage />}
           />
             <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route
-            path="/products"
-            element={<ProductsPage />}
-          />
+         
           <Route
             path="/order-summary"
             element={<OrderSummary />}
@@ -44,7 +41,7 @@ function App() {
             element={<SignUp/>}
           />
            <Route
-            path="/add"
+            path="/products"
             element={<AddProducts />}
           />
         </Routes>

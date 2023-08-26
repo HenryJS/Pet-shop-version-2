@@ -2,6 +2,8 @@ import React from 'react';
 import { useCart } from  './cartcontext'; 
 import Footer from '../footer/footer';
 import './style/summary.css'; 
+import Navbar from '../nav/Navbar';
+
 
 const OrderSummary = () => {
   const { cartItems, totalPrice, removeFromCart } = useCart(); 
@@ -12,6 +14,7 @@ const OrderSummary = () => {
 
   return (
     <>
+    <Navbar />
       <div className="order-summary-container">
         <h2>Order Summary</h2>
         <table className="order-summary-table">

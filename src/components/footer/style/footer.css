@@ -69,7 +69,7 @@
 
   .footer-icons {
     margin-top: 1rem;
-    display: flex;
+    display: flex !important;
   }
   
   .footer-icons svg {

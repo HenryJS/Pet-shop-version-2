@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { useState, useEffect } from 'react'; // Import useEffect
+import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { useCart } from '../products/cartcontext';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -13,9 +13,15 @@ const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
 
-  auth.onAuthStateChanged((user) => {
-    setUser(user);
-  });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []); // Add an empty dependency array to run the effect only once
 
   const handleLogout = () => {
     auth.signOut();
@@ -36,9 +42,11 @@ const Navbar = () => {
         <ScrollLink to="testimonials" smooth={true} duration={500}>
           Testimonials
         </ScrollLink>
-        <Link to="/order-summary">
-          <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
-        </Link>
+        {user && ( // Display cart info only for logged-in users
+          <Link to="/order-summary">
+            <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
+          </Link>
+        )}
       </div>
 
       <div className="menu-icon-container">

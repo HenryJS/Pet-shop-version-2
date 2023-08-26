@@ -6,6 +6,8 @@ import {ref} from "firebase/storage"
 import { useDownloadURL , useUploadFile } from 'react-firebase-hooks/storage'
 import { useCollectionOnce ,useCollectionData} from  "react-firebase-hooks/firestore"
 import SingleProductCard from './SingleProductCard';
+import Footer from '../footer/footer'
+
 
 const AddProducts = () => {
   const [productsData, productsLoading, productsError] = useCollectionData(collection(db,"Products"));
@@ -23,8 +25,8 @@ const AddProducts = () => {
     <>
       <Navbar />
       <div className='App'>
-      <input type="file" accept="image/*"  onChange={ (e)=> setImage(e.target.files[0])} />
-      <button className=" p-4  bg-black text-white" onClick={handleUpload}>Upload Image</button>
+     {/* <input type="file" accept="image/*"  onChange={ (e)=> setImage(e.target.files[0])} />  
+      <button className=" p-4  bg-black text-white" onClick={handleUpload}>Upload Image</button> */} 
         <h2> PRODUCTS</h2>
         <div className='product-container'>
           {productsData?.map(product => (
@@ -32,6 +34,7 @@ const AddProducts = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };
