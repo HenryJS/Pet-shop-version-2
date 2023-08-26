@@ -27,7 +27,7 @@ const AddProducts = () => {
       <div className='App'>
      {/* <input type="file" accept="image/*"  onChange={ (e)=> setImage(e.target.files[0])} />  
       <button className=" p-4  bg-black text-white" onClick={handleUpload}>Upload Image</button> */} 
-        <h2> PRODUCTS</h2>
+        <h2 className="text-center font-semibold text-xl">PRODUCTS</h2>
         <div className='product-container'>
           {productsData?.map(product => (
              <SingleProductCard key={product.ProductId} name={product.ProductName} price={product.ProductPrice} imageId={product.ProductImg} />

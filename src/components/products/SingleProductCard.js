@@ -37,7 +37,7 @@ export default function SingleProductCard({ name, price, imageId }) {
             <h3 className="text-lg font-semibold mt-2 text-center">{name}</h3>
             <p className="text-gray-600 text-center">Price: Ksh {price}</p>
             <button
-                className="mt-3 px-4 py-2 bg-orange-300 text-white rounded hover:bg-orange-400 transition duration-300 flex items-center"
+                className="mt-3 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-400 transition duration-300 flex items-center"
                 onClick={(e) => {
                     e.stopPropagation(); // Prevent event from bubbling
                     handleAddToCart();
