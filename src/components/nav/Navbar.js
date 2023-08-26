@@ -47,13 +47,7 @@ const Navbar = () => {
             <ShoppingCartIcon /> {cartItems.length} items (Ksh{totalPrice})
           </Link>
         )}
-      </div>
-
-      <div className="menu-icon-container">
-        <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
-      </div>
-
-      {user ? (
+         {user ? (
         <div className="user-welcome">
           Welcome, {user.displayName}
           <button className='logout' onClick={handleLogout}>Logout</button>
@@ -63,6 +57,13 @@ const Navbar = () => {
           Login
         </Link>
       )}
+      </div>
+
+      <div className="menu-icon-container">
+        <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
+      </div>
+
+     
     </nav>
   );
 };

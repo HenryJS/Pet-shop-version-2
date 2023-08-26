@@ -40,29 +40,32 @@ nav {
   font-weight: 600;
   transition: 0.2s;
 }
+.primary-button:hover {
+  background-color: rgb(234, 234, 234);
+}
 
-.logout{
-  padding: 0.9rem 1.75rem;
+.logout {
+  padding: 0.5rem 1rem;
   background-color: rgb(245, 138, 138);
   outline: none;
   border: none;
-  border-radius: 5rem;
+  border-radius: 20px; 
   font-size: 0.8rem;
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
-}
-.user-welcome{
-  padding-right: 5px;
-  font-size: 20px;
+  margin-right: 1rem; 
 }
 
 .logout:hover {
   background-color: rgb(234, 234, 234);
 }
-.primary-button:hover {
-  background-color: rgb(234, 234, 234);
+
+.user-welcome {
+  font-size: 18px; 
+  margin-right: 0.7rem; 
 }
+
 .menu-icon-container {
   display: none;
 }
