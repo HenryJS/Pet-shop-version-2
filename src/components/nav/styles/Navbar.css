@@ -18,16 +18,17 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 70px;
+  min-height: 40px;
   
 }
 .navbar-links-container a {
-  margin-right: 3rem;
+  margin-right: 7rem;
   text-decoration: none;
   color: black;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
+  
 }
 .primary-button {
   padding: 0.9rem 1.75rem;
