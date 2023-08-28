@@ -14,7 +14,7 @@ const AddProducts = () => {
   return (
     <>
       <Navbar />
-      <div className='App'> 
+      <div className=''> 
         <h2 className="text-center font-semibold text-xl">PRODUCTS</h2>
           <div className='product-container grid grid-cols-1 md:grid-cols-3 gap-4 justify-center items-center'>
             {productsData?.map(product => (
