@@ -8,6 +8,7 @@ import Testimonial from './components/testimonial/testimonial';
 import Login from './pages/login.page';
 import SignUp from './pages/signup.page'
 import AddProducts from './components/products/AddProducts';
+import Add from './components/admin/add';
 
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
         <Route
             path="/"
             element={<Homepage />}
+          />
+           <Route
+            path="/add"
+            element={<Add />}
           />
             <Route path="/login" element={<Login setUser={setUser} />} />
          

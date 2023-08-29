@@ -50,5 +50,6 @@ getDocs(colRef)
   console.log(err.message)
 })
 
+
 // Export the auth, db, and storage objects
 export { auth, db, storage };
