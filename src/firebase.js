@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { getStorage} from 'firebase/storage';
 import { getFirestore, 
           collection,
-        getDocs, addDoc
+        getDocs, addDoc, doc, deleteDoc
         } 
           from "firebase/firestore"; // Import getFirestore
 
@@ -52,4 +52,4 @@ getDocs(colRef)
 
 
 
-export { auth, db, storage, colRef, addDoc };
+export { auth, db, storage, colRef, addDoc, deleteDoc, doc };

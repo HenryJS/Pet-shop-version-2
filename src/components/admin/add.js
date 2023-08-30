@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { colRef, addDoc } from '../../firebase'; 
+import { colRef, addDoc, deleteDoc, doc } from '../../firebase'; 
 import './styles/admin.css';
 
 const Add = () => {
@@ -7,6 +7,7 @@ const Add = () => {
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productImage, setProductImage] = useState('');
+  const [deleteProductId, setDeleteProductId] = useState('');
 
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -28,6 +29,21 @@ const Add = () => {
       .catch((error) => {
         console.error('Error adding product: ', error);
       });
+  };
+
+  const handleDeleteProduct = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Delete the document using the product ID
+      await deleteDoc(doc(colRef, deleteProductId));
+      console.log('Document deleted successfully.');
+    } catch (error) {
+      console.error('Error deleting document: ', error);
+    }
+
+    // Clear the form field
+    setDeleteProductId('');
   };
 
   return (
@@ -70,6 +86,19 @@ const Add = () => {
         />
 
         <button type="submit">Add a new pet product</button>
+      </form>
+
+      <form className="delete" onSubmit={handleDeleteProduct}>
+        <label htmlFor="deleteProductId">Product ID:</label>
+        <input
+          type="text"
+          name="deleteProductId"
+          value={deleteProductId}
+          onChange={(e) => setDeleteProductId(e.target.value)}
+          required
+        />
+
+        <button type="submit">Delete a pet product</button>
       </form>
     </div>
   );
