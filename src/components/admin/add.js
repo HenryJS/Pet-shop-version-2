@@ -3,10 +3,10 @@ import { colRef, addDoc, deleteDoc, doc } from '../../firebase';
 import './styles/admin.css';
 
 const Add = () => {
-  const [productId, setProductId] = useState('');
-  const [productName, setProductName] = useState('');
-  const [productPrice, setProductPrice] = useState('');
-  const [productImage, setProductImage] = useState('');
+  const [ProductId, setProductId] = useState('');
+  const [ProductName, setProductName] = useState('');
+  const [ProductPrice, setProductPrice] = useState('');
+  const [ProductImg, setProductImage] = useState('');
   const [deleteProductId, setDeleteProductId] = useState('');
 
   const handleAddProduct = (e) => {
@@ -14,10 +14,10 @@ const Add = () => {
 
     // Using Firebase addDoc function to add data
     addDoc(colRef, {
-      productId: productId,
-      productName: productName,
-      productPrice: productPrice,
-      productImage: productImage,
+      ProductId: ProductId,
+      ProductName: ProductName,
+      ProductPrice: ProductPrice,
+      ProductImg: ProductImg,
     })
       .then(() => {
         // Reset the form fields after successful submission
@@ -53,34 +53,34 @@ const Add = () => {
         <input
           type="text"
           name="productId"
-          value={productId}
+          value={ProductId}
           onChange={(e) => setProductId(e.target.value)}
           required
         />
 
-        <label htmlFor="productName">Product Name:</label>
+        <label htmlFor="ProductName">Product Name:</label>
         <input
           type="text"
-          name="productName"
-          value={productName}
+          name="ProductName"
+          value={ProductName}
           onChange={(e) => setProductName(e.target.value)}
           required
         />
 
-        <label htmlFor="productPrice">Product Price:</label>
+        <label htmlFor="ProductPrice">Product Price:</label>
         <input
           type="text"
-          name="productPrice"
-          value={productPrice}
+          name="ProductPrice"
+          value={ProductPrice}
           onChange={(e) => setProductPrice(e.target.value)}
           required
         />
 
-        <label htmlFor="productImage">Product Image URL:</label>
+        <label htmlFor="ProductImage">Product Image URL:</label>
         <input
           type="text"
-          name="productImage"
-          value={productImage}
+          name="ProductImage"
+          value={ProductImg}
           onChange={(e) => setProductImage(e.target.value)}
           required
         />

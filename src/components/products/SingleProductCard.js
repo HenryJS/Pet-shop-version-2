@@ -6,7 +6,7 @@ import { useCart } from "./cartcontext";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AddCircle, RemoveCircle, Delete } from "@mui/icons-material";
-import "./style/singleproduct.css"; // Import your CSS file
+import "./style/singleproduct.css";
 
 export default function SingleProductCard({ name, price, imageId }) {
   const navigate = useNavigate();

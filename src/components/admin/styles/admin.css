@@ -1,6 +1,4 @@
-/* styles.css */
 
-/* Center the form and give it some padding */
 form {
     display: flex;
     flex-direction: column;
@@ -22,7 +20,7 @@ form {
   input[type="text"],
   input[type="number"],
   input[type="file"] {
-    width: 100%;
+    width: 50%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
