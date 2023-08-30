@@ -1,90 +1,78 @@
 import React, { useState } from 'react';
-import { db, storage } from '../../firebase'; // Adjust the path to your firebase.js file
-import { ref, uploadBytes } from 'firebase/storage';
-import { addDoc, collection } from 'firebase/storage';
-import './styles/admin.css'; 
+import { colRef, addDoc } from '../../firebase'; 
+import './styles/admin.css';
 
-function Add() {
-  const [productName, setProductName] = useState('');
+const Add = () => {
   const [productId, setProductId] = useState('');
+  const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
-  const [productImage, setProductImage] = useState(null);
+  const [productImage, setProductImage] = useState('');
 
-  const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setProductImage(imageFile);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleAddProduct = (e) => {
     e.preventDefault();
 
-    // Upload the image to Firebase Storage and get the URL
-    const storageRef = ref(storage, `product_images/${productImage.name}`);
-    await uploadBytes(storageRef, productImage);
-
-    // Get the image URL
-    const imageUrl = await storage.ref().child(`product_images/${productImage.name}`).getDownloadURL();
-
-    // Add the product to Firebase Firestore
-    const productsRef = collection(db, 'Products');
-    await addDoc(productsRef, {
-      ProductName: productName,
-      ProductId: productId,
-      ProductPrice: parseFloat(productPrice),
-      ProductImg: imageUrl,
-    });
-
-    // Reset form fields after submission
-    setProductName('');
-    setProductId('');
-    setProductPrice('');
-    setProductImage(null);
+    // Using Firebase addDoc function to add data
+    addDoc(colRef, {
+      productId: productId,
+      productName: productName,
+      productPrice: productPrice,
+      productImage: productImage,
+    })
+      .then(() => {
+        // Reset the form fields after successful submission
+        setProductId('');
+        setProductName('');
+        setProductPrice('');
+        setProductImage('');
+      })
+      .catch((error) => {
+        console.error('Error adding product: ', error);
+      });
   };
 
   return (
-    <div className='add-container'>
-      <h2>Add Product</h2>
-      <form className='add-form' onSubmit={handleSubmit}>
-        <label>
-          Product Name:
-          <input
-            type='text'
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Product ID:
-          <input
-            type='text'
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Product Price:
-          <input
-            type='number'
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Product Image:
-          <input
-            type='file'
-            accept='image/*'
-            onChange={handleImageChange}
-            required
-          />
-        </label>
-        <button type='submit'>Add Product</button>
+    <div>
+      <form className="add" onSubmit={handleAddProduct}>
+        <label htmlFor="productId">Product ID:</label>
+        <input
+          type="text"
+          name="productId"
+          value={productId}
+          onChange={(e) => setProductId(e.target.value)}
+          required
+        />
+
+        <label htmlFor="productName">Product Name:</label>
+        <input
+          type="text"
+          name="productName"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+          required
+        />
+
+        <label htmlFor="productPrice">Product Price:</label>
+        <input
+          type="text"
+          name="productPrice"
+          value={productPrice}
+          onChange={(e) => setProductPrice(e.target.value)}
+          required
+        />
+
+        <label htmlFor="productImage">Product Image URL:</label>
+        <input
+          type="text"
+          name="productImage"
+          value={productImage}
+          onChange={(e) => setProductImage(e.target.value)}
+          required
+        />
+
+        <button type="submit">Add a new pet product</button>
       </form>
     </div>
   );
-}
+};
 
 export default Add;

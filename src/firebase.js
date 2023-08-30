@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { getStorage} from 'firebase/storage';
 import { getFirestore, 
           collection,
-        getDocs
+        getDocs, addDoc
         } 
           from "firebase/firestore"; // Import getFirestore
 
@@ -30,9 +30,9 @@ const storage = getStorage(app)
 const auth = getAuth(app);
 
 // Initialize Firestore and get a reference to the service
-const db = getFirestore(app); // Use getFirestore to initialize Firestore
+const db = getFirestore(app); 
  
-// Initialize Storage and get a reference to the service
+
 
  // collection
 const colRef = collection( db, 'Products')
@@ -51,5 +51,5 @@ getDocs(colRef)
 })
 
 
-// Export the auth, db, and storage objects
-export { auth, db, storage };
+
+export { auth, db, storage, colRef, addDoc };
