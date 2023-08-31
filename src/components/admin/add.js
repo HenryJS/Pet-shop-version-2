@@ -1,34 +1,45 @@
 import React, { useState } from 'react';
 import { colRef, addDoc, deleteDoc, doc } from '../../firebase'; 
+import { ref, storage, uploadString } from '../../firebase'; // Import ref and storage
 import './styles/admin.css';
 
 const Add = () => {
   const [ProductId, setProductId] = useState('');
   const [ProductName, setProductName] = useState('');
   const [ProductPrice, setProductPrice] = useState('');
-  const [ProductImg, setProductImage] = useState('');
+  const [ProductImg, setProductImage] = useState(null);
   const [deleteProductId, setDeleteProductId] = useState('');
 
-  const handleAddProduct = (e) => {
+  const handleAddProduct = async (e) => {
     e.preventDefault();
 
-    // Using Firebase addDoc function to add data
-    addDoc(colRef, {
-      ProductId: ProductId,
-      ProductName: ProductName,
-      ProductPrice: ProductPrice,
-      ProductImg: ProductImg,
-    })
-      .then(() => {
-        // Reset the form fields after successful submission
-        setProductId('');
-        setProductName('');
-        setProductPrice('');
-        setProductImage('');
-      })
-      .catch((error) => {
-        console.error('Error adding product: ', error);
+    try {
+      let imageUrl = '';
+
+      // Upload the selected image to Firebase Storage
+      if (ProductImg) {
+        const storageRef = ref(storage, `ProductImages/${ProductImg.name}`);
+        await uploadString(storageRef, ProductImg, 'data_url');
+
+        imageUrl = `ProductImages/${ProductImg.name}`;
+      }
+
+      // Using Firebase addDoc function to add data
+      await addDoc(colRef, {
+        ProductId: ProductId,
+        ProductName: ProductName,
+        ProductPrice: ProductPrice,
+        ProductImg: imageUrl,
       });
+
+      // Reset the form fields after successful submission
+      setProductId('');
+      setProductName('');
+      setProductPrice('');
+      setProductImage(null);
+    } catch (error) {
+      console.error('Error adding product: ', error);
+    }
   };
 
   const handleDeleteProduct = async (e) => {
@@ -76,12 +87,12 @@ const Add = () => {
           required
         />
 
-        <label htmlFor="ProductImage">Product Image URL:</label>
+        <label htmlFor="ProductImage">Product Image:</label>
         <input
-          type="text"
+          type="file"
           name="ProductImage"
-          value={ProductImg}
-          onChange={(e) => setProductImage(e.target.value)}
+          onChange={(e) => setProductImage(e.target.files[0])}
+          accept="image/*" // Allow only image files
           required
         />
 

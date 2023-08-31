@@ -1,12 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getStorage} from 'firebase/storage';
-import { getFirestore, 
-          collection,
-        getDocs, addDoc, doc, deleteDoc
-        } 
-          from "firebase/firestore"; // Import getFirestore
+import { getStorage, ref, uploadString } from 'firebase/storage';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore"; // Import getFirestore
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -52,4 +55,4 @@ getDocs(colRef)
 
 
 
-export { auth, db, storage, colRef, addDoc, deleteDoc, doc };
+export { auth, db, storage, colRef, addDoc, deleteDoc, doc, ref, uploadString };
