@@ -5,7 +5,7 @@ import { db } from '../../firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import SingleProductCard from './SingleProductCard';
 import Footer from '../footer/footer';
-import './style/products.css'; // Import your CSS file
+import './style/products.css'; 
 
 const AddProducts = () => {
   const [productsData] = useCollectionData(collection(db, 'Products'));

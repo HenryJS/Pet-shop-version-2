@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { colRef, addDoc, deleteDoc, doc } from '../../firebase'; 
-import { ref, storage, uploadString } from '../../firebase'; // Import ref and storage
+import { getStorage, ref, uploadString } from 'firebase/storage'; 
+
 import './styles/admin.css';
 
 const Add = () => {
@@ -9,6 +10,7 @@ const Add = () => {
   const [ProductPrice, setProductPrice] = useState('');
   const [ProductImg, setProductImage] = useState(null);
   const [deleteProductId, setDeleteProductId] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -18,25 +20,40 @@ const Add = () => {
 
       // Upload the selected image to Firebase Storage
       if (ProductImg) {
+        const storage = getStorage(); // Get the storage instance
         const storageRef = ref(storage, `ProductImages/${ProductImg.name}`);
-        await uploadString(storageRef, ProductImg, 'data_url');
+        
+        // Read the selected image file as a data URL
+        const fileReader = new FileReader();
+        fileReader.onload = async () => {
+          const fileDataUrl = fileReader.result;
+          
+          // Upload the image file
+          await uploadString(storageRef, fileDataUrl, 'data_url');
+          
+          imageUrl = `ProductImages/${ProductImg.name}`;
 
-        imageUrl = `ProductImages/${ProductImg.name}`;
+          // Using Firebase addDoc function to add data
+          await addDoc(colRef, {  
+            ProductId: ProductId,
+            ProductName: ProductName,
+            ProductPrice: ProductPrice,
+            ProductImg: imageUrl,
+          });
+
+          setSuccessMessage('Product added successfully');
+
+          // Reset the form fields after successful submission
+          setProductId('');
+          setProductName('');
+          setProductPrice('');
+          setProductImage(null);
+        };
+
+        // Read the image file as a data URL
+        fileReader.readAsDataURL(ProductImg);
+
       }
-
-      // Using Firebase addDoc function to add data
-      await addDoc(colRef, {
-        ProductId: ProductId,
-        ProductName: ProductName,
-        ProductPrice: ProductPrice,
-        ProductImg: imageUrl,
-      });
-
-      // Reset the form fields after successful submission
-      setProductId('');
-      setProductName('');
-      setProductPrice('');
-      setProductImage(null);
     } catch (error) {
       console.error('Error adding product: ', error);
     }
@@ -59,6 +76,7 @@ const Add = () => {
 
   return (
     <div>
+  
       <form className="add" onSubmit={handleAddProduct}>
         <label htmlFor="productId">Product ID:</label>
         <input
@@ -95,7 +113,7 @@ const Add = () => {
           accept="image/*" // Allow only image files
           required
         />
-
+        {successMessage && <div className="success-message">{successMessage}</div>}
         <button type="submit">Add a new pet product</button>
       </form>
 
