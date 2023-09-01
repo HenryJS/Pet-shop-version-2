@@ -23,7 +23,7 @@ export const CartProvider = ({ children }) => {
       setCartItems((prevItems) => [...prevItems, { ...product, quantity: 1 }]);
     }
   };
-
+  
   const removeFromCart = (product) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== product.id)

@@ -9,6 +9,7 @@ import {
   addDoc,
   doc,
   deleteDoc,
+  setDoc,
 } from "firebase/firestore"; // Import getFirestore
 
 
@@ -55,4 +56,4 @@ getDocs(colRef)
 
 
 
-export { auth, db, storage, colRef, addDoc, deleteDoc, doc, ref, uploadString };
+export { auth, db, storage, colRef, addDoc, deleteDoc, doc, ref, uploadString, setDoc };

@@ -11,6 +11,7 @@ const Add = () => {
   const [ProductImg, setProductImage] = useState(null);
   const [deleteProductId, setDeleteProductId] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [deleteMessage, setDeleteMessage] = useState('');
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -72,6 +73,7 @@ const Add = () => {
 
     // Clear the form field
     setDeleteProductId('');
+    setDeleteMessage('Product deleted successfully');
   };
 
   return (
@@ -126,7 +128,7 @@ const Add = () => {
           onChange={(e) => setDeleteProductId(e.target.value)}
           required
         />
-
+        {deleteMessage && <div className='delete-message'>{deleteMessage}</div>}
         <button type="submit">Delete a pet product</button>
       </form>
     </div>
