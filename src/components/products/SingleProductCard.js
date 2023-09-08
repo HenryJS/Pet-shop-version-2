@@ -1,18 +1,30 @@
-import React from "react";
-import { ref } from "firebase/storage";
-import { storage } from "../../firebase";
-import { useDownloadURL } from "react-firebase-hooks/storage";
+import React, { useState, useEffect } from 'react';
+import { storage } from '../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
 import { useCart } from "./cartcontext";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AddCircle, RemoveCircle, Delete } from "@mui/icons-material";
 import "./style/singleproduct.css";
 
-export default function SingleProductCard({ name, price, imageId }) {
+const SingleProductCard = ({ name, price, imageId }) => {
   const navigate = useNavigate();
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
   const user = auth.currentUser;
-  const [downloadUrl] = useDownloadURL(ref(storage, `ProductImages/${imageId}.jpg`));
+
+  const [imageURL, setImageURL] = useState('');
+  const imageRef = ref(storage, `${imageId}`); 
+
+  useEffect(() => {
+    // Fetch the download URL when the component mounts
+    getDownloadURL(imageRef)
+      .then((downloadURL) => {
+        setImageURL(downloadURL);
+      })
+      .catch((error) => {
+        console.error('Error fetching download URL:', error);
+      });
+  }, [imageRef]);
 
   const cartItem = cartItems.find((item) => item.id === imageId);
 
@@ -24,10 +36,19 @@ export default function SingleProductCard({ name, price, imageId }) {
     }
   };
 
+  // New function to handle product click and navigate to product detail page
+  const handleProductClick = () => {
+    navigate(`/product/${imageId}`);
+  };
+
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={handleProductClick}>
       <div className="product-image-container">
-        <img src={downloadUrl} className="product-image" alt="product" />
+        {imageURL ? (
+          <img src={imageURL} className="product-image" alt="product" />
+        ) : (
+          <div>Loading image...</div>
+        )}
       </div>
       <h3 className="product-name">{name}</h3>
       <p className="product-price">Price: Ksh {price}</p>
@@ -51,4 +72,6 @@ export default function SingleProductCard({ name, price, imageId }) {
       </button>
     </div>
   );
-}
+};
+
+export default SingleProductCard;
