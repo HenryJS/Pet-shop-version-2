@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'; // Import useEffect
+import { useState, useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { useCart } from '../products/cartcontext';

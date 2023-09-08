@@ -3,14 +3,24 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase';
 import { db } from '../../firebase';
+import { auth } from '../../firebase'; 
 import Nav from './adminnav';
+import { useNavigate } from 'react-router-dom';
+
 
 import './styles/allproducts.css';
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) =>{
+        if(!user || !user.admin){
+            navigate('/');
+        }
+    });
+
     // Fetch product data from Firestore
     const fetchProducts = async () => {
       try {
@@ -26,7 +36,12 @@ function AdminProducts() {
     };
 
     fetchProducts();
-  }, []);
+    return () =>{
+        unsubscribe();
+      }
+  }, [navigate]);
+  //cleaning up the subscription
+  
 
   // Function to handle item deletion
   const handleDeleteItem = async (productId) => {
