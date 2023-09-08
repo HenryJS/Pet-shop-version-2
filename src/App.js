@@ -9,6 +9,8 @@ import Login from './pages/login.page';
 import SignUp from './pages/signup.page'
 import AddProducts from './components/products/AddProducts';
 import Add from './components/admin/add';
+import AdminProducts from './components/admin/allProducts';
+
 
 
 function App() {
@@ -22,12 +24,16 @@ function App() {
             path="/"
             element={<Homepage />}
           />
+          <Route
+            path="/admin"
+            element={<AdminProducts />}
+          />
            <Route
             path="/add"
             element={<Add />}
           />
-            <Route path="/login" element={<Login setUser={setUser} />} />
-         
+            <Route path="/login" 
+            element={<Login setUser={setUser} />} />
           <Route
             path="/order-summary"
             element={<OrderSummary />}

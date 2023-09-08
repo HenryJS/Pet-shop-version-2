@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { colRef, addDoc, deleteDoc, doc } from '../../firebase'; 
 import { getStorage, ref, uploadString } from 'firebase/storage'; 
+import Nav from './adminnav';
 
 import './styles/admin.css';
 
@@ -77,8 +78,9 @@ const Add = () => {
   };
 
   return (
-    <div>
-  
+  <div>
+    <Nav />
+  <div className="title">Add Products</div>
       <form className="add" onSubmit={handleAddProduct}>
         <label htmlFor="productId">Product ID:</label>
         <input
