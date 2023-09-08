@@ -14,7 +14,7 @@ const AddProducts = () => {
     <>
       <Navbar />
       <div className=''>
-        <h2 className='text-center font-semibold text-xl'>PRODUCTS</h2>
+        <h2 className='heading'>PRODUCTS</h2>
         <div className='product-container'>
           {productsData?.map((product) => (
             <SingleProductCard
