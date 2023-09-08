@@ -8,9 +8,12 @@
   padding: 20px;
 }
 
+.container1{
+  background-color: #777575 !important;
+}
 .product-card {
   
-  background-color: #fff;
+  background-color: #c7bfbf;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 20px;
@@ -24,6 +27,7 @@
   text-align: center;
   font-size: 2rem;
   text-decoration: dotted;
+  color: azure;
 }
 .product-image {
   width: 200px;
@@ -42,4 +46,18 @@
 .product-price {
   font-size: 1rem;
   color: #666;
+}
+
+/* Styles for smaller screens */
+@media (max-width: 768px) {
+  .product-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Additional styles for even smaller screens */
+@media (max-width: 480px) {
+  .product-container {
+    grid-template-columns: 1fr;
+  }
 }

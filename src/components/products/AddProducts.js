@@ -13,7 +13,7 @@ const AddProducts = () => {
   return (
     <>
       <Navbar />
-      <div className=''>
+      <div className='container1'>
         <h2 className='heading'>PRODUCTS</h2>
         <div className='product-container'>
           {productsData?.map((product) => (
