@@ -31,7 +31,7 @@
     max-width: 100px;
     max-height: 100px;
     display: block; 
-    margin: 0 auto;
+    margin: 0 ;
   }
   
   .admin-products-container {
@@ -39,3 +39,22 @@
     justify-content: center;
   }
   
+  .product-image{
+   justify-content: center;
+    width: 100px;
+    height: 100px;
+  }
+
+  .delete{
+    background-color: rgb(248, 69, 69);
+    font-size: 28px;
+    border: 1px black solid ;
+    border-radius: 20px;
+    padding: 2px 5px 2px 5px;
+    cursor: pointer;
+  }
+
+  .delete:hover{
+    background-color: rgb(236, 112, 112);
+    transform:  ease 0.9s;
+  }
