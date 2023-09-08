@@ -52,7 +52,7 @@ function AdminProducts() {
               <th>Product Name</th>
               <th>Product Price</th>
               <th>Product Image</th>
-              <th>Delete</th> {/* Replace "Quantity" with "Delete" */}
+              <th>Delete</th> 
             </tr>
           </thead>
           <tbody>
@@ -77,7 +77,7 @@ function AdminProducts() {
   );
 }
 
-// Create a separate component to fetch and display product images
+// fetching and displaying product images
 function ProductImage({ imageId }) {
   const [imageURL, setImageURL] = useState('');
   const imageRef = ref(storage, `${imageId}`); 

@@ -1,12 +1,16 @@
 .navbar {
-    background-color: #746a64;
+    background-color: #353230;
     padding: 10px;
     text-align: center;
     justify-content: space-between;
+    
   }
   
   .nav-link{
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
   }
   .nav-item {
     color: #fff;
@@ -29,5 +33,6 @@
     cursor: pointer;
     text-decoration: none;
     display: inline-block; 
+    border-radius: 20px;
   }
   

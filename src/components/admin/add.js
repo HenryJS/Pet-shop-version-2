@@ -118,7 +118,7 @@ const Add = () => {
           required
         />
         {successMessage && <div className="success-message">{successMessage}</div>}
-        <button type="submit">Add a new pet product</button>
+        <button type="submit">Add a new pet </button>
       </form>
 
       <form className="delete" onSubmit={handleDeleteProduct}>
@@ -131,7 +131,7 @@ const Add = () => {
           required
         />
         {deleteMessage && <div className='delete-message'>{deleteMessage}</div>}
-        <button type="submit">Delete a pet product</button>
+        <button type="submit">Delete a pet</button>
       </form>
     </div>
   );

@@ -19,7 +19,7 @@ function Nav() {
         </li>
         <li>
           <button className="logout-button">
-            <Link to="/logout" className="nav-item">Logout</Link>
+            <Link to="/" className="nav-item">Logout</Link>
           </button>
         </li>
       </ul>
