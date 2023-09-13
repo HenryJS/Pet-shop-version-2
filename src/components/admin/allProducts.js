@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../firebase';
 import { db } from '../../firebase';
-import { auth } from '../../firebase'; 
 import Nav from './adminnav';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,13 +12,7 @@ function AdminProducts() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) =>{
-        if(!user || !user.admin){
-            navigate('/');
-        }
-    });
-
-    // Fetch product data from Firestore
+     // Fetch product data from Firestore
     const fetchProducts = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, 'Products'));
@@ -37,7 +28,7 @@ function AdminProducts() {
 
     fetchProducts();
     return () =>{
-        unsubscribe();
+       // unsubscribe();
       }
   }, [navigate]);
   //cleaning up the subscription
@@ -77,8 +68,7 @@ function AdminProducts() {
                 <td>{product.ProductName}</td>
                 <td>Ksh. {product.ProductPrice}</td>
                 <td>
-                  {/* Fetch and display image for each product */}
-                  <ProductImage imageId={product.ProductImg} />
+                  <img src={product.ProductImg} alt="/" />
                 </td>
                 <td>
                   <button className="delete" onClick={() => handleDeleteItem(product.id)}>Delete</button>
@@ -92,31 +82,6 @@ function AdminProducts() {
   );
 }
 
-// fetching and displaying product images
-function ProductImage({ imageId }) {
-  const [imageURL, setImageURL] = useState('');
-  const imageRef = ref(storage, `${imageId}`); 
 
-  useEffect(() => {
-    // Fetch the download URL when the component mounts
-    getDownloadURL(imageRef)
-      .then((downloadURL) => {
-        setImageURL(downloadURL);
-      })
-      .catch((error) => {
-        console.error('Error fetching download URL:', error);
-      });
-  }, [imageRef]);
-
-  return (
-    <div className="product-image">
-      {imageURL ? (
-        <img src={imageURL} className="product-image" alt="product" />
-      ) : (
-        <div>Loading image...</div>
-      )}
-    </div>
-  );
-}
 
 export default AdminProducts;

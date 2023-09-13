@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { colRef, addDoc, deleteDoc, doc } from '../../firebase'; 
 import { getStorage, ref, uploadString } from 'firebase/storage'; 
+import { getDownloadURL } from 'firebase/storage';
 import Nav from './adminnav';
 
 import './styles/admin.css';
@@ -16,50 +17,51 @@ const Add = () => {
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
-
+  
     try {
       let imageUrl = '';
-
+  
       // Upload the selected image to Firebase Storage
       if (ProductImg) {
         const storage = getStorage(); // Get the storage instance
         const storageRef = ref(storage, `ProductImages/${ProductImg.name}`);
-        
-        // Read the selected image file as a data URL
-        const fileReader = new FileReader();
-        fileReader.onload = async () => {
-          const fileDataUrl = fileReader.result;
-          
-          // Upload the image file
-          await uploadString(storageRef, fileDataUrl, 'data_url');
-          
-          imageUrl = `ProductImages/${ProductImg.name}`;
-
+  
+        // Read the selected file as a data URL
+        const reader = new FileReader();
+        reader.readAsDataURL(ProductImg);
+  
+        reader.onload = async (event) => {
+          const dataURL = event.target.result;
+  
+          // Upload the image file as a base64-encoded string
+          await uploadString(storageRef, dataURL, 'data_url');
+  
+          // Get the download URL of the uploaded image
+          imageUrl = await getDownloadURL(storageRef);
+  
           // Using Firebase addDoc function to add data
-          await addDoc(colRef, {  
+          await addDoc(colRef, {
             ProductId: ProductId,
             ProductName: ProductName,
             ProductPrice: ProductPrice,
             ProductImg: imageUrl,
           });
-
+  
           setSuccessMessage('Product added successfully');
-
+  
           // Reset the form fields after successful submission
           setProductId('');
           setProductName('');
           setProductPrice('');
           setProductImage(null);
         };
-
-        // Read the image file as a data URL
-        fileReader.readAsDataURL(ProductImg);
-
       }
     } catch (error) {
       console.error('Error adding product: ', error);
     }
   };
+  
+  
 
   const handleDeleteProduct = async (e) => {
     e.preventDefault();

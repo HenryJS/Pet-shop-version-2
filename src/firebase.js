@@ -37,23 +37,62 @@ const auth = getAuth(app);
 const db = getFirestore(app); 
  
 
-
  // collection
-const colRef = collection( db, 'Products')
+ const colRef = collection( db, 'Products')
+ 
+// Collection reference for Products
+const productsCollection = collection(db, "Products");
 
-//get collection data
-getDocs(colRef)
-.then((snapshot) => {
-  let Products = []
-  snapshot.docs.forEach((doc) => {
-    Products.push({ ...doc.data(), id:doc.id})
-  })
-  console.log(Products)
-})
-.catch(err =>{
-  console.log(err.message)
-})
+// Collection reference for Orders
+const ordersCollection = collection(db, "Orders");
+
+// Function to add an order to the Orders collection
+const addOrder = async (userId, orderId, orderDate, orderItems) => {
+  try {
+    const orderRef = doc(ordersCollection, orderId);
+    await setDoc(orderRef, {
+      userId,
+      orderId,
+      orderDate,
+      orderItems,
+    });
+    console.log("Order added successfully");
+  } catch (error) {
+    console.error("Error adding order:", error);
+  }
+};
 
 
+// Function to fetch all products from the Products collection
+const fetchProducts = async () => {
+  try {
+    const snapshot = await getDocs(productsCollection);
+    let Products = [];
+    snapshot.docs.forEach((doc) => {
+      Products.push({ ...doc.data(), id: doc.id });
+    });
+    return Products;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+};
 
-export { auth, db, storage, colRef, addDoc, deleteDoc, doc, ref, uploadString, setDoc };
+// Export the functions and references
+export {
+  auth,
+  db,
+  storage,
+  colRef,
+  productsCollection,
+  ordersCollection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+  ref,
+  uploadString,
+  setDoc,
+  addOrder,
+  fetchProducts,
+};

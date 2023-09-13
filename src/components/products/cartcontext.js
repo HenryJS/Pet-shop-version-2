@@ -55,14 +55,18 @@ export const CartProvider = ({ children }) => {
     0
   );
 
+  const dispatch = {
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        addToCart,
-        removeFromCart,
-        increaseQuantity,
-        decreaseQuantity,
+        dispatch, // Include dispatch in the context value
         totalPrice,
       }}
     >
