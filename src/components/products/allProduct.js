@@ -1,38 +1,36 @@
-import React, { useContext } from 'react';
-import { ProductsContext } from './ProductsContext';
-import { useCart } from './cartcontext';
+import React from 'react';
+import Navbar from '../nav/Navbar';
+import { collection } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import SingleProductCard from './SingleProductCard';
+import Footer from '../footer/footer';
+import './style/products.css'; 
 
- const Products = () => {
-  const { products } = useContext(ProductsContext);
-  const { dispatch } = useContext(useCart);
+const AddProducts = () => {
+  const [productsData] = useCollectionData(collection(db, 'Products'));
 
   return (
     <>
-      {products.length !== 0 && <h1>Products</h1>}
-      <div className='products-container'>
-        {products.length === 0 && <div>Slow internet...no products to display</div>}
-        {products.map(product => (
-          <div className='product-card' key={product.ProductID}>
-            <div className='product-img'>
-              <img src={product.ProductImg} alt="not found" />
-            </div>
-            <div className='product-name'>
-              {product.ProductName}
-            </div>
-            <div className='product-price'>
-              Ksh. {product.ProductPrice}.00
-            </div>
-            <button
-              className='addcart-btn'
-              onClick={() => dispatch({ type: 'ADD_TO_CART', id: product.ProductID, product })}
-            >
-              ADD TO CART
-            </button>
-          </div>
-        ))}
+      <Navbar />
+      <div className=''>
+        <h2 className='text-center font-semibold text-xl'>PRODUCTS</h2>
+        <div className='product-container'>
+          {productsData?.map((product) => (
+            <SingleProductCard
+              key={product.ProductId}
+              name={product.ProductName}
+              price={product.ProductPrice}
+              imageId={product.ProductImg}
+            />
+          ))}
+        </div>
       </div>
+      <Footer />
     </>
   );
 };
 
-export default Products;
+export default AddProducts;
+
+

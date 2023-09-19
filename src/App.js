@@ -11,13 +11,11 @@ import Add from './components/admin/add';
 import AdminProducts from './components/admin/allProducts';
 import AdminDashboard from './components/admin/dashboard';
 import AllProducts from './components/products/allProduct';
-import { ProductsContextProvider } from './components/products/ProductsContext';
 
 function App() {
   const [setUser] = useState(null); // Initialize user state
 
   return (
-    <ProductsContextProvider>
       <CartProvider> 
         <Router>
           <Routes>
@@ -34,7 +32,6 @@ function App() {
           </Routes>
         </Router>
       </CartProvider>
-    </ProductsContextProvider>
   );
 }
 
