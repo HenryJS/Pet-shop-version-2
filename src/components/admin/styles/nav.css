@@ -1,0 +1,38 @@
+.navbar {
+    background-color: #353230;
+    padding: 10px;
+    text-align: center;
+    justify-content: space-between;
+    
+  }
+  
+  .nav-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  .nav-item {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px; 
+    display: inline-block; 
+    border-bottom: 2px solid transparent; 
+    transition: border-color 0.3s; 
+  }
+  
+  .nav-item:hover {
+    border-color: white; 
+  }
+
+  .logout-button {
+    background-color: #ff5722;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; 
+    border-radius: 20px;
+  }
+  

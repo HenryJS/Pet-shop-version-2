@@ -1,3 +1,4 @@
+
 img {
   max-width: 100%;
   height: auto;
@@ -17,15 +18,17 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 90px;
+  min-height: 40px;
+  
 }
 .navbar-links-container a {
-  margin-right: 3rem;
+  margin-right: 7rem;
   text-decoration: none;
   color: black;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
+  
 }
 .primary-button {
   padding: 0.9rem 1.75rem;
@@ -41,6 +44,29 @@ nav {
 .primary-button:hover {
   background-color: rgb(234, 234, 234);
 }
+
+.logout {
+  padding: 0.5rem 1rem;
+  background-color: rgb(245, 138, 138);
+  outline: none;
+  border: none;
+  border-radius: 20px; 
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+  margin-right: 1rem; 
+}
+
+.logout:hover {
+  background-color: rgb(234, 234, 234);
+}
+
+.user-welcome {
+  font-size: 18px; 
+  margin-right: 0.7rem; 
+}
+
 .menu-icon-container {
   display: none;
 }

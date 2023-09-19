@@ -23,7 +23,7 @@ export const CartProvider = ({ children }) => {
       setCartItems((prevItems) => [...prevItems, { ...product, quantity: 1 }]);
     }
   };
-
+  
   const removeFromCart = (product) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== product.id)
@@ -55,14 +55,18 @@ export const CartProvider = ({ children }) => {
     0
   );
 
+  const dispatch = {
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        addToCart,
-        removeFromCart,
-        increaseQuantity,
-        decreaseQuantity,
+        dispatch, // Include dispatch in the context value
         totalPrice,
       }}
     >
