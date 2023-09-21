@@ -20,10 +20,12 @@ export const CartProvider = ({ children }) => {
         )
       );
     } else {
-      setCartItems((prevItems) => [...prevItems, { ...product, quantity: 1 }]);
+      setCartItems((prevItems) => [
+        ...prevItems,
+        { ...product, quantity: 1, image: product.downloadUrl }, 
+      ]);
     }
   };
-
   const removeFromCart = (product) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== product.id)

@@ -20,7 +20,7 @@ export default function SingleProductCard({ name, price, imageId }) {
 
   const handleAddToCart = () => {
     if (user) {
-      addToCart({ id: imageId, name, price });
+      addToCart({ id: imageId, name, price, downloadUrl });
     } else {
       navigate("/login");
     }
