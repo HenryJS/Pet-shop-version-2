@@ -46,6 +46,12 @@ function AdminProducts() {
     }
   };
 
+  const handleEditItem = (productId) => {
+    // You can navigate to an edit page or show a modal for editing here
+    // Example: navigate(`/edit-product/${productId}`);
+    console.log(`Edit product with ID: ${productId}`);
+  };
+
   return (
     <>
       <Nav />
@@ -58,7 +64,7 @@ function AdminProducts() {
               <th>Product Name</th>
               <th>Product Price</th>
               <th>Product Image</th>
-              <th>Delete</th> 
+              <th>Actions</th> 
             </tr>
           </thead>
           <tbody>
@@ -68,10 +74,25 @@ function AdminProducts() {
                 <td>{product.ProductName}</td>
                 <td>Ksh. {product.ProductPrice}</td>
                 <td>
-                  <img src={product.ProductImg} alt="/" />
+                  <img
+                    src={product.ProductImg}
+                    alt={product.ProductName} 
+                    className="admin-product-image" 
+                  />
                 </td>
                 <td>
-                  <button className="delete" onClick={() => handleDeleteItem(product.id)}>Delete</button>
+                  <button
+                    className="edit" 
+                    onClick={() => handleEditItem(product.id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete" 
+                    onClick={() => handleDeleteItem(product.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -81,7 +102,4 @@ function AdminProducts() {
     </>
   );
 }
-
-
-
 export default AdminProducts;

@@ -39,7 +39,7 @@ export default function SingleProductCard({ name, price, imageId }) {
     <div className="product-card">
       <div className="product-image-container">
         {/* Use the downloadUrl as the src attribute */}
-        <img src={downloadUrl} className="product-image" alt="product" />
+        <img src={downloadUrl} className="product-image1" alt="product" />
       </div>
       <h3 className="product-name">{name}</h3>
       <p className="product-price">Price: Ksh {price}</p>

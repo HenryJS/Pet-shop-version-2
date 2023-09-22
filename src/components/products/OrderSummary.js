@@ -1,39 +1,41 @@
 import React, { useState } from 'react';
-import { useCart } from  './cartcontext'; 
+import { useCart } from './cartcontext';
 import Footer from '../footer/footer';
-import './style/summary.css'; 
+import './style/summary.css';
 import Navbar from '../nav/Navbar';
 import { useNavigate } from 'react-router-dom';
 
 const OrderSummary = () => {
-  const { cartItems, totalPrice, removeFromCart } = useCart(); 
+  const { cartItems, totalPrice, removeFromCart } = useCart();
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
-  const [paymentMethod, setPaymentMethod] =useState('m-pesa');
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-  }
+  };
   const handleAddressChange = (e) => {
     setAddress(e.target.value);
-  }
+  };
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
-  }
+  };
   const handleProceed = () => {
     // Validate user input
     if (name && address && paymentMethod) {
       // Pass user details and cart items as state to OrderConfirmation
-      navigate('/confirm', { state: { name, address, paymentMethod, cartItems, totalPrice } });
+      navigate('/confirm', {
+        state: { name, address, paymentMethod, cartItems, totalPrice },
+      });
     } else {
-      console.log('error proceeding')
+      console.log('error proceeding');
     }
   };
   const handleRemoveItem = (item) => {
     removeFromCart(item);
   };
-
+  
   return (
     <>
     <Navbar />

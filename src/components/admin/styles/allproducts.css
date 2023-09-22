@@ -58,3 +58,38 @@
     background-color: rgb(236, 112, 112);
     transform:  ease 0.9s;
   }
+  
+.admin-product-image {
+  max-width: 100px;
+  max-height: 100px;
+  display: block;
+  margin: 0 auto; /* Center the image */
+}
+
+/* Style for the edit button */
+.edit {
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Style for the delete button (unchanged) */
+.delete {
+  background-color: rgb(248, 69, 69);
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for the edit button (you can adjust as needed) */
+.edit:hover {
+  background-color: #45a049;
+}
