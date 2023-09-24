@@ -1,38 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { ordersCollection, fetchProducts } from '../../firebase';
-import { getDocs } from 'firebase/firestore';
+import { db } from '../../firebase'; 
 
-function AdminDashboard() {
+const Dashboard = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Fetch orders data from Firestore
     const fetchOrders = async () => {
       try {
-        const snapshot = await getDocs(ordersCollection);
-        let ordersData = [];
-        snapshot.docs.forEach((doc) => {
-          ordersData.push({ ...doc.data(), id: doc.id });
-        });
-
-        // Fetch products to map order items to product names
-        const products = await fetchProducts();
-
-        // Map product IDs to product names in order items
-        ordersData = ordersData.map((order) => ({
-          ...order,
-          orderItems: order.orderItems.map((item) => {
-            const product = products.find((p) => p.id === item.productId);
-            return {
-              ...item,
-              productName: product ? product.ProductName : 'Product Not Found',
-            };
-          }),
+        const ordersSnapshot = await db.collection('orders').orderBy('timestamp', 'desc').get();
+        const ordersData = ordersSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
         }));
-
         setOrders(ordersData);
       } catch (error) {
-        console.error('Error fetching orders:', error);
+        console.error("Error fetching orders from Firestore: ", error);
       }
     };
 
@@ -41,37 +23,22 @@ function AdminDashboard() {
 
   return (
     <div>
-      <h2>Admin Dashboard</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>User ID</th>
-            <th>Order ID</th>
-            <th>Order Date</th>
-            <th>Order Items</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{order.userId}</td>
-              <td>{order.orderId}</td>
-              <td>{order.orderDate.toDate().toLocaleString()}</td>
-              <td>
-                <ul>
-                  {order.orderItems.map((item) => (
-                    <li key={item.productId}>
-                      {item.productName} (Quantity: {item.quantity})
-                    </li>
-                  ))}
-                </ul>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h2>Order Dashboard</h2>
+      <ul>
+        {orders.map((order) => (
+          <li key={order.id}>
+            <p>Order ID: {order.id}</p>
+            <p>Name: {order.name}</p>
+            <p>Address: {order.address}</p>
+            <p>Payment Method: {order.paymentMethod}</p>
+            {/* Add additional order details here */}
+            <p>Total Price: Ksh {order.totalPrice}</p>
+            <p>Order Timestamp: {order.timestamp.toDate().toLocaleString()}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
-export default AdminDashboard;
+export default Dashboard;
