@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../../firebase'; 
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import './AdminDashboard.css'; // Import your CSS file for styling
+import PetsIcon from '@mui/icons-material/Pets';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    // Fetch orders from Firestore (replace 'yourFirestoreCollection' with the actual collection name)
     const fetchOrders = async () => {
+      const db = getFirestore();
+      const ordersCollection = collection(db, 'yourFirestoreCollection'); // Replace with your collection name
+
       try {
-        const ordersSnapshot = await db.collection('orders').orderBy('timestamp', 'desc').get();
-        const ordersData = ordersSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const querySnapshot = await getDocs(ordersCollection);
+        const ordersData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setOrders(ordersData);
       } catch (error) {
-        console.error("Error fetching orders from Firestore: ", error);
+        console.error('Error fetching orders:', error);
       }
     };
 
@@ -23,22 +34,46 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Order Dashboard</h2>
-      <ul>
-        {orders.map((order) => (
-          <li key={order.id}>
-            <p>Order ID: {order.id}</p>
-            <p>Name: {order.name}</p>
-            <p>Address: {order.address}</p>
-            <p>Payment Method: {order.paymentMethod}</p>
-            {/* Add additional order details here */}
-            <p>Total Price: Ksh {order.totalPrice}</p>
-            <p>Order Timestamp: {order.timestamp.toDate().toLocaleString()}</p>
-          </li>
-        ))}
-      </ul>
+      <h1>Admin Dashboard</h1>
+      <TableContainer>
+        <Table className="order-table" aria-label="Order table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Order ID</TableCell>
+              <TableCell>User</TableCell>
+              <TableCell>Total Price</TableCell>
+              <TableCell>Order Items</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell>{order.orderId}</TableCell>
+                <TableCell>{order.userName}</TableCell>
+                <TableCell>Ksh {order.totalPrice}</TableCell>
+                <TableCell className="order-items">
+                  {order.orderItems.map((item, index) => (
+                    <div key={index}>
+                      {item.name.includes('Pet') && (
+                        <PetsIcon className="icon pet-icon" />
+                      )}
+                      {item.name.includes('Food') && (
+                        <FastfoodIcon className="icon food-icon" />
+                      )}
+                      {item.name.includes('Mall') && (
+                        <LocalMallIcon className="icon mall-icon" />
+                      )}
+                      {item.name} x{item.quantity}
+                    </div>
+                  ))}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

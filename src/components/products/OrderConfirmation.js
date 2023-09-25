@@ -18,7 +18,7 @@ const OrderConfirmation = () => {
     // Automatically hide the banner after 5 seconds
     const bannerTimer = setTimeout(() => {
       setShowBanner(false);
-    }, 10000);
+    }, 5000);
 
     return () => {
       // Clear the timer when the component unmounts

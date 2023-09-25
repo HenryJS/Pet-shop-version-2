@@ -1,0 +1,28 @@
+/* Styling for the AdminDashboard component */
+.order-table {
+    width: 100%;
+  }
+  
+  .icon {
+    margin-right: 5px;
+  }
+  
+  .pet-icon {
+    color: brown;
+  }
+  
+  .food-icon {
+    color: green;
+  }
+  
+  .mall-icon {
+    color: purple;
+  }
+  
+  .order-items {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Add more CSS styles as needed */
+  
