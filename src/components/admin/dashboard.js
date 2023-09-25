@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import './styles/AdminDashboard.css'; // Import your CSS file for styling
+import Button from '@mui/material/Button';
+import './styles/AdminDashboard.css';
 import PetsIcon from '@mui/icons-material/Pets';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
@@ -15,10 +16,9 @@ const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Fetch orders from Firestore (replace 'yourFirestoreCollection' with the actual collection name)
     const fetchOrders = async () => {
       const db = getFirestore();
-      const ordersCollection = collection(db, 'orders'); // Replace with your collection name
+      const ordersCollection = collection(db, 'orders');
 
       try {
         const querySnapshot = await getDocs(ordersCollection);
@@ -32,6 +32,19 @@ const AdminDashboard = () => {
     fetchOrders();
   }, []);
 
+  const handleClearOrder = async (orderId) => {
+    // Delete the order with the specified ID from Firestore
+    const db = getFirestore();
+    const orderRef = doc(db, 'yourFirestoreCollection', orderId); // Replace with your collection name
+    try {
+      await deleteDoc(orderRef);
+      // Remove the deleted order from the state
+      setOrders((prevOrders) => prevOrders.filter((order) => order.id !== orderId));
+    } catch (error) {
+      console.error('Error clearing order:', error);
+    }
+  };
+
   return (
     <div>
       <h1>Admin Dashboard</h1>
@@ -42,7 +55,11 @@ const AdminDashboard = () => {
               <TableCell>Order ID</TableCell>
               <TableCell>User</TableCell>
               <TableCell>Total Price</TableCell>
+              <TableCell>User Address</TableCell> {/* Add this column */}
+              <TableCell>Payment Method</TableCell>
+              <TableCell>Date</TableCell>
               <TableCell>Order Items</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -51,6 +68,11 @@ const AdminDashboard = () => {
                 <TableCell>{order.orderId}</TableCell>
                 <TableCell>{order.userName}</TableCell>
                 <TableCell>Ksh {order.totalPrice}</TableCell>
+                <TableCell>{order.userAddress}</TableCell> {/* Display user address */}
+                <TableCell>{order.paymentMethod}</TableCell>
+                <TableCell>
+                  {order.timestamp && order.timestamp.toDate().toLocaleString()} {/* Convert timestamp to string */}
+                </TableCell>
                 <TableCell className="order-items">
                   {Array.isArray(order.orderItems) ? (
                     order.orderItems.map((item, index) => (
@@ -70,6 +92,15 @@ const AdminDashboard = () => {
                   ) : (
                     <div>No order items found</div>
                   )}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleClearOrder(order.id)}
+                  >
+                    Clear
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
