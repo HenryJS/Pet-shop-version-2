@@ -44,24 +44,7 @@ const db = getFirestore(app);
 const productsCollection = collection(db, "Products");
 
 // Collection reference for Orders
-const ordersCollection = collection(db, "Orders");
-
-// Function to add an order to the Orders collection
-const addOrder = async (userId, orderId, orderDate, orderItems) => {
-  try {
-    const orderRef = doc(ordersCollection, orderId);
-    await setDoc(orderRef, {
-      userId,
-      orderId,
-      orderDate,
-      orderItems,
-    });
-    console.log("Order added successfully");
-  } catch (error) {
-    console.error("Error adding order:", error);
-  }
-};
-
+const ordersCollection = collection(db, "orders");
 
 // Function to fetch all products from the Products collection
 const fetchProducts = async () => {
@@ -93,6 +76,5 @@ export {
   ref,
   uploadString,
   setDoc,
-  addOrder,
   fetchProducts,
 };

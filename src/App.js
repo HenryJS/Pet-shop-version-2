@@ -6,7 +6,7 @@ import { CartProvider } from './components/products/cartcontext';
 import Homepage from './pages/home.page';
 import Testimonial from './components/testimonial/testimonial';
 import Login from './pages/login.page';
-import SignUp from './pages/signup.page'
+import SignUp from './pages/signup.page';
 import Add from './components/admin/add';
 import AdminProducts from './components/admin/allProducts';
 import AdminDashboard from './components/admin/dashboard';
@@ -31,7 +31,6 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/confirm" element={<OrderConfirmation />} />
-
           </Routes>
         </Router>
       </CartProvider>
