@@ -11,7 +11,7 @@ const OrderSummary = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [userAddress, setUserAddress] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('card', 'mpesa', 'payment on delivery');
 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);

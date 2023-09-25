@@ -45,6 +45,10 @@ const productsCollection = collection(db, "Products");
 
 // Collection reference for Orders
 const ordersCollection = collection(db, "orders");
+ //collection reference for counter 
+ const countersCollection = collection(db, "counters");
+
+
 
 // Function to fetch all products from the Products collection
 const fetchProducts = async () => {
@@ -69,6 +73,7 @@ export {
   colRef,
   productsCollection,
   ordersCollection,
+  countersCollection,
   getDocs,
   addDoc,
   deleteDoc,
