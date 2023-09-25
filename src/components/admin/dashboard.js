@@ -52,20 +52,24 @@ const AdminDashboard = () => {
                 <TableCell>{order.userName}</TableCell>
                 <TableCell>Ksh {order.totalPrice}</TableCell>
                 <TableCell className="order-items">
-                  {order.orderItems.map((item, index) => (
-                    <div key={index}>
-                      {item.name.includes('Pet') && (
-                        <PetsIcon className="icon pet-icon" />
-                      )}
-                      {item.name.includes('Food') && (
-                        <FastfoodIcon className="icon food-icon" />
-                      )}
-                      {item.name.includes('Mall') && (
-                        <LocalMallIcon className="icon mall-icon" />
-                      )}
-                      {item.name} x{item.quantity}
-                    </div>
-                  ))}
+                  {Array.isArray(order.orderItems) ? (
+                    order.orderItems.map((item, index) => (
+                      <div key={index}>
+                        {item.name.includes('Pet') && (
+                          <PetsIcon className="icon pet-icon" />
+                        )}
+                        {item.name.includes('Food') && (
+                          <FastfoodIcon className="icon food-icon" />
+                        )}
+                        {item.name.includes('Mall') && (
+                          <LocalMallIcon className="icon mall-icon" />
+                        )}
+                        {item.name} x{item.quantity}
+                      </div>
+                    ))
+                  ) : (
+                    <div>No order items found</div>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
