@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import './AdminDashboard.css'; // Import your CSS file for styling
+import './styles/AdminDashboard.css'; // Import your CSS file for styling
 import PetsIcon from '@mui/icons-material/Pets';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
@@ -18,7 +18,7 @@ const AdminDashboard = () => {
     // Fetch orders from Firestore (replace 'yourFirestoreCollection' with the actual collection name)
     const fetchOrders = async () => {
       const db = getFirestore();
-      const ordersCollection = collection(db, 'yourFirestoreCollection'); // Replace with your collection name
+      const ordersCollection = collection(db, 'orders'); // Replace with your collection name
 
       try {
         const querySnapshot = await getDocs(ordersCollection);
