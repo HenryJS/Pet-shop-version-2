@@ -12,6 +12,7 @@ import AdminProducts from './components/admin/allProducts';
 import AdminDashboard from './components/admin/dashboard';
 import AllProducts from './components/products/allProduct';
 import OrderConfirmation from './components/products/OrderConfirmation';
+import EditProduct from './components/admin/EditProduct';
 
 function App() {
   const [setUser] = useState(null); // Initialize user state
@@ -31,6 +32,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/confirm" element={<OrderConfirmation />} />
+            <Route path="/edit" element={<EditProduct />} />
           </Routes>
         </Router>
       </CartProvider>

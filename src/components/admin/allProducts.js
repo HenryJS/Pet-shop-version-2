@@ -47,9 +47,7 @@ function AdminProducts() {
   };
 
   const handleEditItem = (productId) => {
-    // You can navigate to an edit page or show a modal for editing here
-    // Example: navigate(`/edit-product/${productId}`);
-    console.log(`Edit product with ID: ${productId}`);
+    navigate(`/admin/products/edit/${productId}`);
   };
 
   return (
