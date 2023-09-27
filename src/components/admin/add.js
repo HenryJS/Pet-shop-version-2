@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { colRef, addDoc, deleteDoc, doc } from '../../firebase'; 
+import { colRef, addDoc } from '../../firebase'; 
 import { getStorage, ref, uploadString } from 'firebase/storage'; 
 import { getDownloadURL } from 'firebase/storage';
 import Nav from './adminnav';
@@ -11,9 +11,7 @@ const Add = () => {
   const [ProductName, setProductName] = useState('');
   const [ProductPrice, setProductPrice] = useState('');
   const [ProductImg, setProductImage] = useState(null);
-  const [deleteProductId, setDeleteProductId] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [deleteMessage, setDeleteMessage] = useState('');
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -63,21 +61,7 @@ const Add = () => {
   
   
 
-  const handleDeleteProduct = async (e) => {
-    e.preventDefault();
 
-    try {
-      // Delete the document using the product ID
-      await deleteDoc(doc(colRef, deleteProductId));
-      console.log('Document deleted successfully.');
-    } catch (error) {
-      console.error('Error deleting document: ', error);
-    }
-
-    // Clear the form field
-    setDeleteProductId('');
-    setDeleteMessage('Product deleted successfully');
-  };
 
   return (
   <div>
@@ -123,18 +107,7 @@ const Add = () => {
         <button type="submit">Add a new pet </button>
       </form>
 
-      <form className="delete" onSubmit={handleDeleteProduct}>
-        <label htmlFor="deleteProductId">Product ID:</label>
-        <input
-          type="text"
-          name="deleteProductId"
-          value={deleteProductId}
-          onChange={(e) => setDeleteProductId(e.target.value)}
-          required
-        />
-        {deleteMessage && <div className='delete-message'>{deleteMessage}</div>}
-        <button type="submit">Delete a pet</button>
-      </form>
+    
     </div>
   );
 };
