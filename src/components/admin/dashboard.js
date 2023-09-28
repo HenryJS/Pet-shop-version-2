@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   const handleClearOrder = async (orderId) => {
     // Delete the order with the specified ID from Firestore
     const db = getFirestore();
-    const orderRef = doc(db, 'yourFirestoreCollection', orderId); // Replace with your collection name
+    const orderRef = doc(db, 'orders', orderId); // Replace with your collection name
     try {
       await deleteDoc(orderRef);
       // Remove the deleted order from the state
@@ -55,9 +55,10 @@ const AdminDashboard = () => {
             <Table className="order-table" aria-label="Order table">
               <TableHead>
                 <TableRow>
+                  <TableCell>UserId</TableCell>
                   <TableCell>User</TableCell>
                   <TableCell>Total Price</TableCell>
-                  <TableCell>User Address</TableCell> {/* Add this column */}
+                  <TableCell>User Address</TableCell> 
                   <TableCell>Payment Method</TableCell>
                   <TableCell>Date</TableCell>
                   <TableCell>Order Items</TableCell>
@@ -70,10 +71,10 @@ const AdminDashboard = () => {
                     <TableCell>{order.orderId}</TableCell>
                     <TableCell>{order.userName}</TableCell>
                     <TableCell>Ksh {order.totalPrice}</TableCell>
-                    <TableCell>{order.userAddress}</TableCell> {/* Display user address */}
+                    <TableCell>{order.userAddress}</TableCell> 
                     <TableCell>{order.paymentMethod}</TableCell>
                     <TableCell>
-                      {order.timestamp && order.timestamp.toDate().toLocaleString()} {/* Convert timestamp to string */}
+                      {order.timestamp && order.timestamp.toDate().toLocaleString()}
                     </TableCell>
                     <TableCell className="order-items">
                       {Array.isArray(order.orderItems) ? (

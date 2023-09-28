@@ -5,7 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import InputControl from "./inputcontrol/inputControl";
 import { auth } from "../../firebase";
 import Navbar from "../nav/Navbar";
-
+import { getDocs, doc, db } from '../../firebase';
 import "./style/login.css";
 
 function Login() {
@@ -22,26 +22,50 @@ function Login() {
   const [errorMsg, setErrorMsg] = useState("");
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
-  const handleSubmission = () => {
-    if (!values.email || !values.pass) {
-      setErrorMsg("Fill all fields");
-      return;
+  const handleSubmission = async () => {
+    try {
+      if (!values.email || !values.pass) {
+        setErrorMsg("Fill all fields");
+        return;
+      }
+      setErrorMsg("");
+  
+      setSubmitButtonDisabled(true);
+  
+      // Sign in with Firebase Authentication
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        values.email,
+        values.pass
+      );
+  
+      // Successfully logged in, enable the submit button
+      setSubmitButtonDisabled(false);
+  
+      const user = userCredential.user;
+  
+      // Fetch the user's role from Firestore
+      const userDoc = await getDocs(doc(db, "users", user.uid)); // Replace "users" with your Firestore collection name
+  
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const userRole = userData.role; // Assuming "role" is the field for user roles
+  
+        if (userRole === 'admin') {
+          // User is an admin, redirect to the admin dashboard
+          navigate("/admin");
+        } else {
+          // User is not an admin, redirect to the regular user dashboard or homepage
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      // Handle login errors
+      setSubmitButtonDisabled(false);
+      setErrorMsg(error.message);
     }
-    setErrorMsg("");
-
-    setSubmitButtonDisabled(true);
-    signInWithEmailAndPassword(auth, values.email, values.pass)
-      .then(async (res) => {
-        setSubmitButtonDisabled(false);
-
-        navigate("/");
-      })
-      .catch((err) => {
-        setSubmitButtonDisabled(false);
-        setErrorMsg(err.message);
-      });
   };
-
+  
   return (
     <>
       <Navbar />

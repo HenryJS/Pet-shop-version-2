@@ -1,3 +1,5 @@
+/* signup.css */
+
 .container {
   height: 100%;
   min-height: 100vh;
@@ -67,4 +69,11 @@
   letter-spacing: 1px;
   font-size: 1rem;
   text-decoration: none;
+}
+
+/* Responsive Styles for Small Screens */
+@media screen and (max-width: 768px) {
+  .innerBox {
+    min-width: 80%; /* Adjust as needed for small screens */
+  }
 }
